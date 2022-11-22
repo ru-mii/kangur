@@ -78,32 +78,18 @@ namespace kangur
         }
 
         // merging byte arrays with concat
-        public byte[] MergeByteArrays(byte[] array1, byte[] array2)
-        { return array1.Concat(array2).ToArray(); }
+        public byte[] MergeByteArrays(params byte[][] arrays)
+        {
+            // create empty array
+            byte[] byteArray = new byte[0];
 
-        public byte[] MergeByteArrays(byte[] array1, byte[] array2, byte[] array3)
-        { return array1.Concat(array2).ToArray().Concat(array3).ToArray(); }
+            // go through each arrays and connect with concat
+            foreach (byte[] array in arrays)
+                byteArray = byteArray.Concat(array).ToArray();
 
-        public byte[] MergeByteArrays(byte[] array1, byte[] array2, byte[] array3, byte[] array4)
-        { return array1.Concat(array2).ToArray().Concat(array3).ToArray().Concat(array4).ToArray(); }
-
-        public byte[] MergeByteArrays(byte[] array1, byte[] array2, byte[] array3, byte[] array4, byte[] array5)
-        { return array1.Concat(array2).ToArray().Concat(array3).ToArray().Concat(array4).ToArray().Concat(array5).ToArray(); }
-
-        public byte[] MergeByteArrays(byte[] array1, byte[] array2, byte[] array3, byte[] array4, byte[] array5, byte[] array6)
-        { return array1.Concat(array2).ToArray().Concat(array3).ToArray().Concat(array4).ToArray().Concat(array5).ToArray().Concat(array6).ToArray(); }
-
-        public byte[] MergeByteArrays(byte[] array1, byte[] array2, byte[] array3, byte[] array4, byte[] array5, byte[] array6, byte[] array7)
-        { return array1.Concat(array2).ToArray().Concat(array3).ToArray().Concat(array4).ToArray().Concat(array5).ToArray().Concat(array6).ToArray().Concat(array7).ToArray(); }
-
-        public byte[] MergeByteArrays(byte[] array1, byte[] array2, byte[] array3, byte[] array4, byte[] array5, byte[] array6, byte[] array7, byte[] array8)
-        { return array1.Concat(array2).ToArray().Concat(array3).ToArray().Concat(array4).ToArray().Concat(array5).ToArray().Concat(array6).ToArray().Concat(array7).ToArray().Concat(array8).ToArray(); }
-
-        public byte[] MergeByteArrays(byte[] array1, byte[] array2, byte[] array3, byte[] array4, byte[] array5, byte[] array6, byte[] array7, byte[] array8, byte[] array9)
-        { return array1.Concat(array2).ToArray().Concat(array3).ToArray().Concat(array4).ToArray().Concat(array5).ToArray().Concat(array6).ToArray().Concat(array7).ToArray().Concat(array8).ToArray().Concat(array9).ToArray(); }
-
-        public byte[] MergeByteArrays(byte[] array1, byte[] array2, byte[] array3, byte[] array4, byte[] array5, byte[] array6, byte[] array7, byte[] array8, byte[] array9, byte[] array10)
-        { return array1.Concat(array2).ToArray().Concat(array3).ToArray().Concat(array4).ToArray().Concat(array5).ToArray().Concat(array6).ToArray().Concat(array7).ToArray().Concat(array8).ToArray().Concat(array9).ToArray().Concat(array10).ToArray(); }
+            // returned merged arrays
+            return byteArray;
+        }
 
         // imported protection change
         [DllImport("kernel32.dll", SetLastError = true)]
