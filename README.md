@@ -18,4 +18,4 @@ Related to our main character.
 # Hotkeys
 Currently controllers are not supported but it is a priority to make it happen.  
 
-![image](https://user-images.githubusercontent.com/11816713
+![image](https://user-images.githubusercontent.com/118167137/203190276-43e8a0ea-d3f9-46b8-9669-07ad51f8e2fb.png)
