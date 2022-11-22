@@ -10,3 +10,13 @@ kangur/obj/Debug/kangur.csproj.CoreCompileInputs.cache
 kangur/obj/Debug/kangur.csprojAssemblyReference.cache
 kangur/obj/Debug/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
 kangur/obj/Debug/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+*.cache
+*.pdb
+*.exe
+*.config
+*.resources
+*.txt
+kangur/obj/Release/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+kangur/obj/Release/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+kangur/obj/Release/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+.vs/kangur/v15/.suo
