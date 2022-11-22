@@ -2,7 +2,7 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/ru-mii/kangur/badge)](https://www.codefactor.io/repository/github/ru-mii/kangur)  
 Small tool for Kao The Kangaroo 2 speedrunners.  
-Only "digital" version of the game is currently supported.
+Only "digital" version of the game is currently supported.  
 New features will be added soon, when I get some better scores.
 
 ![image](https://user-images.githubusercontent.com/118167137/203191024-af9ec190-70bf-4b43-8d0c-bbc9fb271ea8.png)
