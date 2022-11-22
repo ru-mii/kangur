@@ -3,7 +3,7 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/ru-mii/kangur/badge)](https://www.codefactor.io/repository/github/ru-mii/kangur)  
 Small tool for Kao The Kangaroo 2 speedrunners.
 
-![image](https://user-images.githubusercontent.com/118167137/203188954-c29456ac-3ea0-4d05-8cb2-8f544de61e03.png)
+![image](https://user-images.githubusercontent.com/118167137/203191024-af9ec190-70bf-4b43-8d0c-bbc9fb271ea8.png)
 
 # Control
 You can open any modules or change hotkeys.  
