@@ -10,7 +10,7 @@ You can open any modules or change hotkeys.
 
 ![image](https://user-images.githubusercontent.com/118167137/203188656-8174f3b8-a8fc-4ce4-b509-82e6219697b0.png)
 
-# Hero
+# 1. Hero
 Related to our main character.
 
 ![image](https://user-images.githubusercontent.com/118167137/203188803-ee5cf9a1-4e3f-4b26-9c5f-eb0703552ff0.png)
