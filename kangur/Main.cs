@@ -260,7 +260,6 @@ namespace kangur
 
                         // reset action variable
                         module_hero_ACTION_boost = "";
-
                     }
                     #endregion // ends region
                 }
