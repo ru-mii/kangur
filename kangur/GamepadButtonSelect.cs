@@ -17,7 +17,9 @@ namespace kangur
         { InitializeComponent(); }
 
         // runs on form load
-        private void GamepadButtonSelect_Load(object sender, EventArgs e) { }
+        private void GamepadButtonSelect_Load(object sender, EventArgs e)
+        // select for visuals
+        { rlqooo.Select(); }
 
         // all gamepad buttons and their index
         enum buttons

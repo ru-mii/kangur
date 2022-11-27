@@ -46,6 +46,7 @@
             this.button14 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
+            this.rlqooo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxContoller)).BeginInit();
             this.SuspendLayout();
             // 
@@ -236,12 +237,21 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.buttonSelect_Click);
             // 
+            // rlqooo
+            // 
+            this.rlqooo.AutoSize = true;
+            this.rlqooo.Location = new System.Drawing.Point(32000, 32000);
+            this.rlqooo.Name = "rlqooo";
+            this.rlqooo.Size = new System.Drawing.Size(0, 13);
+            this.rlqooo.TabIndex = 17;
+            // 
             // GamepadButtonSelect
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(130)))), ((int)(((byte)(130)))));
             this.ClientSize = new System.Drawing.Size(616, 463);
+            this.Controls.Add(this.rlqooo);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
@@ -268,6 +278,7 @@
             this.Load += new System.EventHandler(this.GamepadButtonSelect_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxContoller)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -290,5 +301,6 @@
         private System.Windows.Forms.Button button14;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Label rlqooo;
     }
 }
