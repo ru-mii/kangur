@@ -15,6 +15,15 @@ namespace kangur
         // initializing components, ignore
         public Hotkeys() { InitializeComponent(); }
 
+        // changing selected module to default
+        public static string selectedModule = "hero";
+
+        // determines which + button was clicked on hotkeys form
+        public static int clickedPadRow = 0;
+
+        // gamepad form
+        GamepadButtonSelect formGamepadButtonSelect = new GamepadButtonSelect();
+
         // runs on form load
         private void Hotkeys_Load(object sender, EventArgs e)
         {
@@ -22,45 +31,67 @@ namespace kangur
             ntjbah.Select();
 
             // load saved keys
-            heroSnapshotKey.Text = Properties.Settings.Default.hero_snapshotKeyText;
-            heroLoadKey.Text = Properties.Settings.Default.hero_loadKeyText;
-            heroBoostKey.Text = Properties.Settings.Default.hero_boostKeyText;
+            key0.Text = Properties.Settings.Default.hero_snapshotKeyText;
+            key1.Text = Properties.Settings.Default.hero_loadKeyText;
+            key2.Text = Properties.Settings.Default.hero_boostKeyText;
         }
 
         // save pressed key to variable and display on form
-        private void snapshotKey_KeyDown(object sender, KeyEventArgs e)
+        private void key1_KeyDown(object sender, KeyEventArgs e)
         {
             // write and save to settings
-            Properties.Settings.Default.hero_snapshotKeyText = e.KeyCode.ToString();
-            Properties.Settings.Default.hero_snapshotKeyCode = e.KeyValue;
+            if (selectedModule == "hero")
+            {
+                Properties.Settings.Default.hero_snapshotKeyText = e.KeyCode.ToString();
+                Properties.Settings.Default.hero_snapshotKeyCode = e.KeyValue;
+            }
+            else if (selectedModule == "environment")
+            {
+                Properties.Settings.Default.environment_loadLevelText = e.KeyCode.ToString();
+                Properties.Settings.Default.environment_loadLevelKeyCode = e.KeyValue;
+            }
+
+            // save changes
             Properties.Settings.Default.Save();
 
             // show pressed key in textbox
-            heroSnapshotKey.Text = e.KeyCode.ToString();
+            key0.Text = e.KeyCode.ToString();
         }
 
         // save pressed key to variable and display on form
-        private void loadPositionKey_KeyDown(object sender, KeyEventArgs e)
+        private void key2_KeyDown(object sender, KeyEventArgs e)
         {
             // write and save to settings
-            Properties.Settings.Default.hero_loadKeyText = e.KeyCode.ToString();
-            Properties.Settings.Default.hero_loadKeyCode = e.KeyValue;
+            if (selectedModule == "hero")
+            {
+                // write and save to settings
+                Properties.Settings.Default.hero_loadKeyText = e.KeyCode.ToString();
+                Properties.Settings.Default.hero_loadKeyCode = e.KeyValue;
+            }
+
+            // save changes    
             Properties.Settings.Default.Save();
 
             // show pressed key in textbox
-            heroLoadKey.Text = e.KeyCode.ToString();
+            key1.Text = e.KeyCode.ToString();
         }
 
         // save pressed key to variable and display on form
-        private void heroBoostKey_KeyDown(object sender, KeyEventArgs e)
+        private void key3_KeyDown(object sender, KeyEventArgs e)
         {
             // write and save to settings
-            Properties.Settings.Default.hero_boostKeyText = e.KeyCode.ToString();
-            Properties.Settings.Default.hero_boostKeyCode = e.KeyValue;
+            if (selectedModule == "hero")
+            {
+                // write and save to settings
+                Properties.Settings.Default.hero_boostKeyText = e.KeyCode.ToString();
+                Properties.Settings.Default.hero_boostKeyCode = e.KeyValue;
+                Properties.Settings.Default.Save();
+            }
+            // save changes
             Properties.Settings.Default.Save();
 
             // show pressed key in textbox
-            heroBoostKey.Text = e.KeyCode.ToString();
+            key2.Text = e.KeyCode.ToString();
         }
 
         // makes sure we're not closing form, only hiding
@@ -74,30 +105,148 @@ namespace kangur
         }
 
         // clearing snapshot hotkey
-        private void buttonHeroSnapshotClear_Click(object sender, EventArgs e)
+        private void buttonClear1_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.hero_snapshotKeyText = "";
-            Properties.Settings.Default.hero_snapshotKeyCode = 0;
+            if (selectedModule == "hero")
+            {
+                Properties.Settings.Default.hero_snapshotKeyText = "";
+                Properties.Settings.Default.hero_snapshotKeyCode = 0;
+            }
+
+            else if (selectedModule == "environment")
+            {
+                Properties.Settings.Default.environment_loadLevelText = "";
+                Properties.Settings.Default.environment_loadLevelKeyCode = 0;
+            }
+
+            // save changes and clear text
             Properties.Settings.Default.Save();
-            heroSnapshotKey.Text = "";
+            key0.Text = "";
         }
 
         // clearing load hotkey
-        private void buttonHeroLoadClear_Click(object sender, EventArgs e)
+        private void buttonClear2_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.hero_loadKeyText = "";
-            Properties.Settings.Default.hero_loadKeyCode = 0;
+            if (selectedModule == "hero")
+            {
+                Properties.Settings.Default.hero_loadKeyText = "";
+                Properties.Settings.Default.hero_loadKeyCode = 0;
+            }
+
+            // save changes and clear text
             Properties.Settings.Default.Save();
-            heroLoadKey.Text = "";
+            key1.Text = "";
         }
 
         // clearing boost hotkey
-        private void buttonHeroBoostClear_Click(object sender, EventArgs e)
+        private void buttonClear3_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default.hero_boostKeyText = "";
-            Properties.Settings.Default.hero_boostKeyCode = 0;
+            if (selectedModule == "hero")
+            {
+                Properties.Settings.Default.hero_boostKeyText = "";
+                Properties.Settings.Default.hero_boostKeyCode = 0;
+            }
+
+            // save changes and clear text
             Properties.Settings.Default.Save();
-            heroBoostKey.Text = "";
+            key2.Text = "";
+        }
+
+        // select hero module
+        private void buttonSelectHero_Click(object sender, EventArgs e)
+        {
+            // change selected module for code view
+            selectedModule = "hero";
+
+            // description
+            text0.Text = "position snapshot";
+            text1.Text = "load saved position";
+            text2.Text = "boost height";
+
+            // key text
+            key0.Text = Properties.Settings.Default.hero_snapshotKeyText;
+            key1.Text = Properties.Settings.Default.hero_loadKeyText;
+            key2.Text = Properties.Settings.Default.hero_boostKeyText;
+
+            // select oob control for better visuals and functionality
+            ntjbah.Select();
+
+            // change controls visibility, if we have
+            // too many options for the module we just 
+            // hide the hotkey columns that are not required
+            key0.Visible = true;  key1.Visible = true; key2.Visible = true;
+            buttonClear0.Visible = true; buttonClear1.Visible = true; buttonClear2.Visible = true;
+            pad0.Visible = true; pad1.Visible = true; pad2.Visible = true;
+
+            // change buttons visuals
+            SelectButtonVisually("buttonSelectHero");
+        }
+
+        // select environment module
+        private void buttonSelectEnvironment_Click(object sender, EventArgs e)
+        {
+            // change selected module for code view
+            selectedModule = "environment";
+
+            // description
+            text0.Text = "load level";
+            text1.Text = "";
+            text2.Text = "";
+
+            // key text
+            key0.Text = Properties.Settings.Default.environment_loadLevelText;
+            key1.Text = "";
+            key2.Text = "";
+
+            // select oob control for better visuals and functionality
+            ntjbah.Select();
+
+            // change controls visibility, if we have
+            // too many options for the module we just 
+            // hide the hotkey columns that are not required
+            key1.Visible = false; key2.Visible = false;
+            buttonClear1.Visible = false; buttonClear2.Visible = false;
+            pad1.Visible = false; pad2.Visible = false;
+
+            // change buttons visuals
+            SelectButtonVisually("buttonSelectEnvironment");
+        }
+
+        // changes color of selected button and clears the rest
+        private void SelectButtonVisually(string name)
+        {
+            // go through each buttons and reset their color to default
+            // ignore the button we just clicked on
+            foreach (var control in Controls.OfType<Button>())
+            {
+                if (control.Name != name)
+                {
+                    control.Enabled = true;
+                    control.BackColor = Color.FromKnownColor(KnownColor.Control);
+                    control.UseVisualStyleBackColor = true;
+                }
+
+                // make sure these are not clear buttons too
+                else if (control.Text != "clear")
+                {
+                    control.Enabled = false;
+                    control.BackColor = Color.SkyBlue;
+                }
+            }
+        }
+
+        // hotkey pad add button
+        private void pad_Click(object sender, EventArgs e)
+        {
+            // getting clicked button name
+            Button clicked = sender as Button;
+
+            // removing pad from name and converting to int
+            // assigning to static hotkey row value
+            clickedPadRow = int.Parse(clicked.Name.Replace("pad", ""));
+
+            // show gamepad form
+            formGamepadButtonSelect.ShowDialog();
         }
     }
 }

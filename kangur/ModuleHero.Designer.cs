@@ -216,7 +216,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(246, 243);
+            this.ClientSize = new System.Drawing.Size(247, 243);
             this.Controls.Add(this.numericBoost);
             this.Controls.Add(this.buttonBoost);
             this.Controls.Add(this.checkBoxUnlimitedBoomerangs);

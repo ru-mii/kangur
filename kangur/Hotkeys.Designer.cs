@@ -31,17 +31,21 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Hotkeys));
             this.liner_pooura = new System.Windows.Forms.Label();
             this.buttonSelectHero = new System.Windows.Forms.Button();
-            this.jwvlha = new System.Windows.Forms.Label();
-            this.heroSnapshotKey = new System.Windows.Forms.TextBox();
-            this.heroLoadKey = new System.Windows.Forms.TextBox();
-            this.ioiktn = new System.Windows.Forms.Label();
+            this.text0 = new System.Windows.Forms.Label();
+            this.key0 = new System.Windows.Forms.TextBox();
+            this.key1 = new System.Windows.Forms.TextBox();
+            this.text1 = new System.Windows.Forms.Label();
             this.ntjbah = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.buttonHeroLoadClear = new System.Windows.Forms.Button();
-            this.buttonHeroSnapshotClear = new System.Windows.Forms.Button();
-            this.lrxfmw = new System.Windows.Forms.Label();
-            this.heroBoostKey = new System.Windows.Forms.TextBox();
-            this.buttonHeroBoostClear = new System.Windows.Forms.Button();
+            this.buttonClear1 = new System.Windows.Forms.Button();
+            this.buttonClear0 = new System.Windows.Forms.Button();
+            this.text2 = new System.Windows.Forms.Label();
+            this.key2 = new System.Windows.Forms.TextBox();
+            this.buttonClear2 = new System.Windows.Forms.Button();
+            this.buttonSelectEnvironment = new System.Windows.Forms.Button();
+            this.pad0 = new System.Windows.Forms.Button();
+            this.pad1 = new System.Windows.Forms.Button();
+            this.pad2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // liner_pooura
@@ -54,7 +58,7 @@
             // 
             // buttonSelectHero
             // 
-            this.buttonSelectHero.BackColor = System.Drawing.Color.Lime;
+            this.buttonSelectHero.BackColor = System.Drawing.Color.SkyBlue;
             this.buttonSelectHero.Enabled = false;
             this.buttonSelectHero.Location = new System.Drawing.Point(12, 12);
             this.buttonSelectHero.Name = "buttonSelectHero";
@@ -62,44 +66,45 @@
             this.buttonSelectHero.TabIndex = 20;
             this.buttonSelectHero.Text = "hero";
             this.buttonSelectHero.UseVisualStyleBackColor = false;
+            this.buttonSelectHero.Click += new System.EventHandler(this.buttonSelectHero_Click);
             // 
-            // jwvlha
+            // text0
             // 
-            this.jwvlha.AutoSize = true;
-            this.jwvlha.Location = new System.Drawing.Point(150, 18);
-            this.jwvlha.Name = "jwvlha";
-            this.jwvlha.Size = new System.Drawing.Size(89, 13);
-            this.jwvlha.TabIndex = 23;
-            this.jwvlha.Text = "position snapshot";
+            this.text0.AutoSize = true;
+            this.text0.Location = new System.Drawing.Point(150, 18);
+            this.text0.Name = "text0";
+            this.text0.Size = new System.Drawing.Size(89, 13);
+            this.text0.TabIndex = 23;
+            this.text0.Text = "position snapshot";
             // 
-            // heroSnapshotKey
+            // key0
             // 
-            this.heroSnapshotKey.Location = new System.Drawing.Point(325, 15);
-            this.heroSnapshotKey.Name = "heroSnapshotKey";
-            this.heroSnapshotKey.ReadOnly = true;
-            this.heroSnapshotKey.Size = new System.Drawing.Size(79, 20);
-            this.heroSnapshotKey.TabIndex = 26;
-            this.heroSnapshotKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.heroSnapshotKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.snapshotKey_KeyDown);
+            this.key0.Location = new System.Drawing.Point(325, 15);
+            this.key0.Name = "key0";
+            this.key0.ReadOnly = true;
+            this.key0.Size = new System.Drawing.Size(79, 20);
+            this.key0.TabIndex = 26;
+            this.key0.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.key0.KeyDown += new System.Windows.Forms.KeyEventHandler(this.key1_KeyDown);
             // 
-            // heroLoadKey
+            // key1
             // 
-            this.heroLoadKey.Location = new System.Drawing.Point(325, 42);
-            this.heroLoadKey.Name = "heroLoadKey";
-            this.heroLoadKey.ReadOnly = true;
-            this.heroLoadKey.Size = new System.Drawing.Size(79, 20);
-            this.heroLoadKey.TabIndex = 32;
-            this.heroLoadKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.heroLoadKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.loadPositionKey_KeyDown);
+            this.key1.Location = new System.Drawing.Point(325, 42);
+            this.key1.Name = "key1";
+            this.key1.ReadOnly = true;
+            this.key1.Size = new System.Drawing.Size(79, 20);
+            this.key1.TabIndex = 32;
+            this.key1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.key1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.key2_KeyDown);
             // 
-            // ioiktn
+            // text1
             // 
-            this.ioiktn.AutoSize = true;
-            this.ioiktn.Location = new System.Drawing.Point(150, 45);
-            this.ioiktn.Name = "ioiktn";
-            this.ioiktn.Size = new System.Drawing.Size(98, 13);
-            this.ioiktn.TabIndex = 29;
-            this.ioiktn.Text = "load saved position";
+            this.text1.AutoSize = true;
+            this.text1.Location = new System.Drawing.Point(150, 45);
+            this.text1.Name = "text1";
+            this.text1.Size = new System.Drawing.Size(98, 13);
+            this.text1.TabIndex = 29;
+            this.text1.Text = "load saved position";
             // 
             // ntjbah
             // 
@@ -112,7 +117,7 @@
             // label1
             // 
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(12, 38);
+            this.label1.Location = new System.Drawing.Point(12, 81);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 87);
             this.label1.TabIndex = 34;
@@ -120,71 +125,119 @@
     "ields in a window as well";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // buttonHeroLoadClear
+            // buttonClear1
             // 
-            this.buttonHeroLoadClear.Location = new System.Drawing.Point(410, 40);
-            this.buttonHeroLoadClear.Name = "buttonHeroLoadClear";
-            this.buttonHeroLoadClear.Size = new System.Drawing.Size(75, 23);
-            this.buttonHeroLoadClear.TabIndex = 35;
-            this.buttonHeroLoadClear.Text = "clear";
-            this.buttonHeroLoadClear.UseVisualStyleBackColor = true;
-            this.buttonHeroLoadClear.Click += new System.EventHandler(this.buttonHeroLoadClear_Click);
+            this.buttonClear1.Location = new System.Drawing.Point(410, 40);
+            this.buttonClear1.Name = "buttonClear1";
+            this.buttonClear1.Size = new System.Drawing.Size(75, 23);
+            this.buttonClear1.TabIndex = 35;
+            this.buttonClear1.Text = "clear";
+            this.buttonClear1.UseVisualStyleBackColor = true;
+            this.buttonClear1.Click += new System.EventHandler(this.buttonClear2_Click);
             // 
-            // buttonHeroSnapshotClear
+            // buttonClear0
             // 
-            this.buttonHeroSnapshotClear.Location = new System.Drawing.Point(410, 13);
-            this.buttonHeroSnapshotClear.Name = "buttonHeroSnapshotClear";
-            this.buttonHeroSnapshotClear.Size = new System.Drawing.Size(75, 23);
-            this.buttonHeroSnapshotClear.TabIndex = 36;
-            this.buttonHeroSnapshotClear.Text = "clear";
-            this.buttonHeroSnapshotClear.UseVisualStyleBackColor = true;
-            this.buttonHeroSnapshotClear.Click += new System.EventHandler(this.buttonHeroSnapshotClear_Click);
+            this.buttonClear0.Location = new System.Drawing.Point(410, 13);
+            this.buttonClear0.Name = "buttonClear0";
+            this.buttonClear0.Size = new System.Drawing.Size(75, 23);
+            this.buttonClear0.TabIndex = 36;
+            this.buttonClear0.Text = "clear";
+            this.buttonClear0.UseVisualStyleBackColor = true;
+            this.buttonClear0.Click += new System.EventHandler(this.buttonClear1_Click);
             // 
-            // lrxfmw
+            // text2
             // 
-            this.lrxfmw.AutoSize = true;
-            this.lrxfmw.Location = new System.Drawing.Point(150, 72);
-            this.lrxfmw.Name = "lrxfmw";
-            this.lrxfmw.Size = new System.Drawing.Size(65, 13);
-            this.lrxfmw.TabIndex = 37;
-            this.lrxfmw.Text = "boost height";
+            this.text2.AutoSize = true;
+            this.text2.Location = new System.Drawing.Point(150, 72);
+            this.text2.Name = "text2";
+            this.text2.Size = new System.Drawing.Size(65, 13);
+            this.text2.TabIndex = 37;
+            this.text2.Text = "boost height";
             // 
-            // heroBoostKey
+            // key2
             // 
-            this.heroBoostKey.Location = new System.Drawing.Point(325, 69);
-            this.heroBoostKey.Name = "heroBoostKey";
-            this.heroBoostKey.ReadOnly = true;
-            this.heroBoostKey.Size = new System.Drawing.Size(79, 20);
-            this.heroBoostKey.TabIndex = 38;
-            this.heroBoostKey.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.heroBoostKey.KeyDown += new System.Windows.Forms.KeyEventHandler(this.heroBoostKey_KeyDown);
+            this.key2.Location = new System.Drawing.Point(325, 69);
+            this.key2.Name = "key2";
+            this.key2.ReadOnly = true;
+            this.key2.Size = new System.Drawing.Size(79, 20);
+            this.key2.TabIndex = 38;
+            this.key2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.key2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.key3_KeyDown);
             // 
-            // buttonHeroBoostClear
+            // buttonClear2
             // 
-            this.buttonHeroBoostClear.Location = new System.Drawing.Point(410, 67);
-            this.buttonHeroBoostClear.Name = "buttonHeroBoostClear";
-            this.buttonHeroBoostClear.Size = new System.Drawing.Size(75, 23);
-            this.buttonHeroBoostClear.TabIndex = 39;
-            this.buttonHeroBoostClear.Text = "clear";
-            this.buttonHeroBoostClear.UseVisualStyleBackColor = true;
-            this.buttonHeroBoostClear.Click += new System.EventHandler(this.buttonHeroBoostClear_Click);
+            this.buttonClear2.Location = new System.Drawing.Point(410, 67);
+            this.buttonClear2.Name = "buttonClear2";
+            this.buttonClear2.Size = new System.Drawing.Size(75, 23);
+            this.buttonClear2.TabIndex = 39;
+            this.buttonClear2.Text = "clear";
+            this.buttonClear2.UseVisualStyleBackColor = true;
+            this.buttonClear2.Click += new System.EventHandler(this.buttonClear3_Click);
+            // 
+            // buttonSelectEnvironment
+            // 
+            this.buttonSelectEnvironment.BackColor = System.Drawing.SystemColors.Control;
+            this.buttonSelectEnvironment.Location = new System.Drawing.Point(15, 45);
+            this.buttonSelectEnvironment.Name = "buttonSelectEnvironment";
+            this.buttonSelectEnvironment.Size = new System.Drawing.Size(99, 23);
+            this.buttonSelectEnvironment.TabIndex = 41;
+            this.buttonSelectEnvironment.Text = "environment";
+            this.buttonSelectEnvironment.UseVisualStyleBackColor = true;
+            this.buttonSelectEnvironment.Click += new System.EventHandler(this.buttonSelectEnvironment_Click);
+            // 
+            // pad0
+            // 
+            this.pad0.Location = new System.Drawing.Point(488, 13);
+            this.pad0.Name = "pad0";
+            this.pad0.Size = new System.Drawing.Size(23, 23);
+            this.pad0.TabIndex = 42;
+            this.pad0.Text = "c";
+            this.pad0.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.pad0.UseVisualStyleBackColor = true;
+            this.pad0.Click += new System.EventHandler(this.pad_Click);
+            // 
+            // pad1
+            // 
+            this.pad1.Location = new System.Drawing.Point(488, 40);
+            this.pad1.Name = "pad1";
+            this.pad1.Size = new System.Drawing.Size(23, 23);
+            this.pad1.TabIndex = 43;
+            this.pad1.Text = "c";
+            this.pad1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.pad1.UseVisualStyleBackColor = true;
+            this.pad1.Click += new System.EventHandler(this.pad_Click);
+            // 
+            // pad2
+            // 
+            this.pad2.Location = new System.Drawing.Point(488, 66);
+            this.pad2.Name = "pad2";
+            this.pad2.Size = new System.Drawing.Size(23, 23);
+            this.pad2.TabIndex = 44;
+            this.pad2.Text = "c";
+            this.pad2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.pad2.UseVisualStyleBackColor = true;
+            this.pad2.Click += new System.EventHandler(this.pad_Click);
             // 
             // Hotkeys
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 131);
-            this.Controls.Add(this.buttonHeroBoostClear);
-            this.Controls.Add(this.heroBoostKey);
-            this.Controls.Add(this.lrxfmw);
-            this.Controls.Add(this.buttonHeroSnapshotClear);
-            this.Controls.Add(this.buttonHeroLoadClear);
+            this.ClientSize = new System.Drawing.Size(528, 182);
+            this.Controls.Add(this.pad2);
+            this.Controls.Add(this.pad1);
+            this.Controls.Add(this.pad0);
+            this.Controls.Add(this.buttonSelectEnvironment);
+            this.Controls.Add(this.buttonClear2);
+            this.Controls.Add(this.key2);
+            this.Controls.Add(this.text2);
+            this.Controls.Add(this.buttonClear0);
+            this.Controls.Add(this.buttonClear1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ntjbah);
-            this.Controls.Add(this.heroLoadKey);
-            this.Controls.Add(this.ioiktn);
-            this.Controls.Add(this.heroSnapshotKey);
-            this.Controls.Add(this.jwvlha);
+            this.Controls.Add(this.key1);
+            this.Controls.Add(this.text1);
+            this.Controls.Add(this.key0);
+            this.Controls.Add(this.text0);
             this.Controls.Add(this.buttonSelectHero);
             this.Controls.Add(this.liner_pooura);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -203,16 +256,20 @@
 
         private System.Windows.Forms.Label liner_pooura;
         private System.Windows.Forms.Button buttonSelectHero;
-        private System.Windows.Forms.Label jwvlha;
-        private System.Windows.Forms.TextBox heroSnapshotKey;
-        private System.Windows.Forms.TextBox heroLoadKey;
-        private System.Windows.Forms.Label ioiktn;
+        private System.Windows.Forms.Label text0;
+        private System.Windows.Forms.TextBox key0;
+        private System.Windows.Forms.TextBox key1;
+        private System.Windows.Forms.Label text1;
         private System.Windows.Forms.Label ntjbah;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button buttonHeroLoadClear;
-        private System.Windows.Forms.Button buttonHeroSnapshotClear;
-        private System.Windows.Forms.Label lrxfmw;
-        private System.Windows.Forms.TextBox heroBoostKey;
-        private System.Windows.Forms.Button buttonHeroBoostClear;
+        private System.Windows.Forms.Button buttonClear1;
+        private System.Windows.Forms.Button buttonClear0;
+        private System.Windows.Forms.Label text2;
+        private System.Windows.Forms.TextBox key2;
+        private System.Windows.Forms.Button buttonClear2;
+        private System.Windows.Forms.Button buttonSelectEnvironment;
+        private System.Windows.Forms.Button pad0;
+        private System.Windows.Forms.Button pad1;
+        private System.Windows.Forms.Button pad2;
     }
 }

@@ -36,13 +36,15 @@
             this.keyStateThread = new System.ComponentModel.BackgroundWorker();
             this.buttonHotkeys = new System.Windows.Forms.Button();
             this.rrcrxo = new System.Windows.Forms.Label();
+            this.buttonModuleOpenSettingsEnvironment = new System.Windows.Forms.Button();
+            this.buttonStateThread = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // labelProcessStatus
             // 
             this.labelProcessStatus.BackColor = System.Drawing.SystemColors.Control;
             this.labelProcessStatus.ForeColor = System.Drawing.Color.Red;
-            this.labelProcessStatus.Location = new System.Drawing.Point(15, 86);
+            this.labelProcessStatus.Location = new System.Drawing.Point(15, 123);
             this.labelProcessStatus.Name = "labelProcessStatus";
             this.labelProcessStatus.Size = new System.Drawing.Size(210, 13);
             this.labelProcessStatus.TabIndex = 1;
@@ -66,7 +68,7 @@
             // label1
             // 
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Location = new System.Drawing.Point(18, 76);
+            this.label1.Location = new System.Drawing.Point(18, 113);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(202, 2);
             this.label1.TabIndex = 4;
@@ -77,7 +79,7 @@
             // 
             // buttonHotkeys
             // 
-            this.buttonHotkeys.Location = new System.Drawing.Point(12, 40);
+            this.buttonHotkeys.Location = new System.Drawing.Point(12, 70);
             this.buttonHotkeys.Name = "buttonHotkeys";
             this.buttonHotkeys.Size = new System.Drawing.Size(213, 23);
             this.buttonHotkeys.TabIndex = 6;
@@ -93,11 +95,26 @@
             this.rrcrxo.Size = new System.Drawing.Size(0, 13);
             this.rrcrxo.TabIndex = 7;
             // 
+            // buttonModuleOpenSettingsEnvironment
+            // 
+            this.buttonModuleOpenSettingsEnvironment.Location = new System.Drawing.Point(12, 41);
+            this.buttonModuleOpenSettingsEnvironment.Name = "buttonModuleOpenSettingsEnvironment";
+            this.buttonModuleOpenSettingsEnvironment.Size = new System.Drawing.Size(213, 23);
+            this.buttonModuleOpenSettingsEnvironment.TabIndex = 8;
+            this.buttonModuleOpenSettingsEnvironment.Text = "environment";
+            this.buttonModuleOpenSettingsEnvironment.UseVisualStyleBackColor = true;
+            this.buttonModuleOpenSettingsEnvironment.Click += new System.EventHandler(this.buttonModuleOpenSettingsEnvironment_Click);
+            // 
+            // buttonStateThread
+            // 
+            this.buttonStateThread.DoWork += new System.ComponentModel.DoWorkEventHandler(this.buttonStateThread_DoWork);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(238, 109);
+            this.ClientSize = new System.Drawing.Size(238, 148);
+            this.Controls.Add(this.buttonModuleOpenSettingsEnvironment);
             this.Controls.Add(this.rrcrxo);
             this.Controls.Add(this.buttonHotkeys);
             this.Controls.Add(this.label1);
@@ -123,6 +140,8 @@
         private System.ComponentModel.BackgroundWorker keyStateThread;
         private System.Windows.Forms.Button buttonHotkeys;
         private System.Windows.Forms.Label rrcrxo;
+        private System.Windows.Forms.Button buttonModuleOpenSettingsEnvironment;
+        private System.ComponentModel.BackgroundWorker buttonStateThread;
     }
 }
 

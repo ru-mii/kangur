@@ -94,5 +94,29 @@ namespace kangur.Properties {
                 this["hero_boostKeyCode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string environment_loadLevelText {
+            get {
+                return ((string)(this["environment_loadLevelText"]));
+            }
+            set {
+                this["environment_loadLevelText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int environment_loadLevelKeyCode {
+            get {
+                return ((int)(this["environment_loadLevelKeyCode"]));
+            }
+            set {
+                this["environment_loadLevelKeyCode"] = value;
+            }
+        }
     }
 }

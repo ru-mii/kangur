@@ -75,7 +75,7 @@ namespace kangur
         {  return (int)numericBoost.Value; }
 
         // imitates button click, function for usage from another forms
-        public void imitateButtonClick (string name)
+        public void ImitateButtonClick (string name)
         {
             // go through all controls
             foreach (Control control in Controls)
@@ -91,7 +91,7 @@ namespace kangur
         }
 
         // imitates checkbox click, function for usage from another forms
-        public void imitateCheckboxClick(string name)
+        public void ImitateCheckboxClick(string name)
         {
             // go through all controls
             foreach (Control control in Controls)

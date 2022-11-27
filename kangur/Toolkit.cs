@@ -39,7 +39,7 @@ namespace kangur
                 array, array.Length, out IntPtr nullification);
         }
 
-        public uint ReadMemory32 (uint address)
+        public uint ReadMemoryInt32 (uint address)
         {
             // 4 because int is 4
             byte[] rawBytes = new byte[4];
