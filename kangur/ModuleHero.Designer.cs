@@ -247,7 +247,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(247, 284);
+            this.ClientSize = new System.Drawing.Size(247, 271);
             this.Controls.Add(this.numericStars);
             this.Controls.Add(this.buttonStars);
             this.Controls.Add(this.numericBoost);
