@@ -174,9 +174,9 @@ namespace kangur
             // change controls visibility, if we have
             // too many options for the module we just 
             // hide the hotkey columns that are not required
-            key0.Visible = true;  key1.Visible = true; key2.Visible = true;
-            buttonClear0.Visible = true; buttonClear1.Visible = true; buttonClear2.Visible = true;
-            pad0.Visible = true; pad1.Visible = true; pad2.Visible = true;
+            key0.Visible = true;            key1.Visible = true;            key2.Visible = true;
+            buttonClear0.Visible = true;    buttonClear1.Visible = true;    buttonClear2.Visible = true;
+            pad0.Visible = true;            pad1.Visible = true;            pad2.Visible = true;
 
             // change buttons visuals
             SelectButtonVisually("buttonSelectHero");
@@ -190,12 +190,12 @@ namespace kangur
 
             // description
             text0.Text = "load level";
-            text1.Text = "";
+            text1.Text = "force-load all textures";
             text2.Text = "";
 
             // key text
             key0.Text = Properties.Settings.Default.environment_loadLevelText;
-            key1.Text = "";
+            key1.Text = Properties.Settings.Default.environment_forceLoadAllTexturesText;
             key2.Text = "";
 
             // select oob control for better visuals and functionality
@@ -204,9 +204,9 @@ namespace kangur
             // change controls visibility, if we have
             // too many options for the module we just 
             // hide the hotkey columns that are not required
-            key1.Visible = false; key2.Visible = false;
-            buttonClear1.Visible = false; buttonClear2.Visible = false;
-            pad1.Visible = false; pad2.Visible = false;
+            key0.Visible = true;            key1.Visible = true;            key2.Visible = false;
+            buttonClear0.Visible = true;    buttonClear1.Visible = true;    buttonClear2.Visible = false;
+            pad0.Visible = true;            pad1.Visible = true;            pad2.Visible = false;
 
             // change buttons visuals
             SelectButtonVisually("buttonSelectEnvironment");

@@ -118,5 +118,341 @@ namespace kangur.Properties {
                 this["environment_loadLevelKeyCode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_0_best {
+            get {
+                return ((long)(this["ilstimer_0_best"]));
+            }
+            set {
+                this["ilstimer_0_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_1_best {
+            get {
+                return ((long)(this["ilstimer_1_best"]));
+            }
+            set {
+                this["ilstimer_1_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_2_best {
+            get {
+                return ((long)(this["ilstimer_2_best"]));
+            }
+            set {
+                this["ilstimer_2_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_3_best {
+            get {
+                return ((long)(this["ilstimer_3_best"]));
+            }
+            set {
+                this["ilstimer_3_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_4_best {
+            get {
+                return ((long)(this["ilstimer_4_best"]));
+            }
+            set {
+                this["ilstimer_4_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_5_best {
+            get {
+                return ((long)(this["ilstimer_5_best"]));
+            }
+            set {
+                this["ilstimer_5_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_6_best {
+            get {
+                return ((long)(this["ilstimer_6_best"]));
+            }
+            set {
+                this["ilstimer_6_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_7_best {
+            get {
+                return ((long)(this["ilstimer_7_best"]));
+            }
+            set {
+                this["ilstimer_7_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_8_best {
+            get {
+                return ((long)(this["ilstimer_8_best"]));
+            }
+            set {
+                this["ilstimer_8_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_9_best {
+            get {
+                return ((long)(this["ilstimer_9_best"]));
+            }
+            set {
+                this["ilstimer_9_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_10_best {
+            get {
+                return ((long)(this["ilstimer_10_best"]));
+            }
+            set {
+                this["ilstimer_10_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_11_best {
+            get {
+                return ((long)(this["ilstimer_11_best"]));
+            }
+            set {
+                this["ilstimer_11_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_12_best {
+            get {
+                return ((long)(this["ilstimer_12_best"]));
+            }
+            set {
+                this["ilstimer_12_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_13_best {
+            get {
+                return ((long)(this["ilstimer_13_best"]));
+            }
+            set {
+                this["ilstimer_13_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_14_best {
+            get {
+                return ((long)(this["ilstimer_14_best"]));
+            }
+            set {
+                this["ilstimer_14_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_15_best {
+            get {
+                return ((long)(this["ilstimer_15_best"]));
+            }
+            set {
+                this["ilstimer_15_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_16_best {
+            get {
+                return ((long)(this["ilstimer_16_best"]));
+            }
+            set {
+                this["ilstimer_16_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_17_best {
+            get {
+                return ((long)(this["ilstimer_17_best"]));
+            }
+            set {
+                this["ilstimer_17_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_18_best {
+            get {
+                return ((long)(this["ilstimer_18_best"]));
+            }
+            set {
+                this["ilstimer_18_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_19_best {
+            get {
+                return ((long)(this["ilstimer_19_best"]));
+            }
+            set {
+                this["ilstimer_19_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_20_best {
+            get {
+                return ((long)(this["ilstimer_20_best"]));
+            }
+            set {
+                this["ilstimer_20_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_21_best {
+            get {
+                return ((long)(this["ilstimer_21_best"]));
+            }
+            set {
+                this["ilstimer_21_best"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_0_backup {
+            get {
+                return ((long)(this["ilstimer_0_backup"]));
+            }
+            set {
+                this["ilstimer_0_backup"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_clean {
+            get {
+                return ((long)(this["ilstimer_clean"]));
+            }
+            set {
+                this["ilstimer_clean"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_1_backup {
+            get {
+                return ((long)(this["ilstimer_1_backup"]));
+            }
+            set {
+                this["ilstimer_1_backup"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long ilstimer_2_backup {
+            get {
+                return ((long)(this["ilstimer_2_backup"]));
+            }
+            set {
+                this["ilstimer_2_backup"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string environment_forceLoadAllTexturesText {
+            get {
+                return ((string)(this["environment_forceLoadAllTexturesText"]));
+            }
+            set {
+                this["environment_forceLoadAllTexturesText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int environment_forceLoadAllTexturesKeyCode {
+            get {
+                return ((int)(this["environment_forceLoadAllTexturesKeyCode"]));
+            }
+            set {
+                this["environment_forceLoadAllTexturesKeyCode"] = value;
+            }
+        }
     }
 }

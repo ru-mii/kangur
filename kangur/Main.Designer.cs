@@ -44,7 +44,7 @@
             // 
             this.labelProcessStatus.BackColor = System.Drawing.SystemColors.Control;
             this.labelProcessStatus.ForeColor = System.Drawing.Color.Red;
-            this.labelProcessStatus.Location = new System.Drawing.Point(15, 123);
+            this.labelProcessStatus.Location = new System.Drawing.Point(15, 111);
             this.labelProcessStatus.Name = "labelProcessStatus";
             this.labelProcessStatus.Size = new System.Drawing.Size(210, 13);
             this.labelProcessStatus.TabIndex = 1;
@@ -68,7 +68,7 @@
             // label1
             // 
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Location = new System.Drawing.Point(18, 113);
+            this.label1.Location = new System.Drawing.Point(18, 101);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(202, 2);
             this.label1.TabIndex = 4;
@@ -113,7 +113,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(238, 148);
+            this.ClientSize = new System.Drawing.Size(238, 132);
             this.Controls.Add(this.buttonModuleOpenSettingsEnvironment);
             this.Controls.Add(this.rrcrxo);
             this.Controls.Add(this.buttonHotkeys);

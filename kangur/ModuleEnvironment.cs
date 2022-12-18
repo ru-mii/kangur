@@ -28,9 +28,16 @@ namespace kangur
                 Main.module_environment_ACTION_loadLevel = comboBoxLevelSelect.SelectedIndex + 1;
         }
 
-        // unlocks all levels
+        // unlocks all levels and disable button
         private void buttonUnlockAllLevels_Click(object sender, EventArgs e)
-        { Main.module_environment_ACTION_unlock_all_levels = "TRUE"; }
+        {
+            Main.module_environment_ACTION_unlock_all_levels = "TRUE";
+            buttonUnlockAllLevels.Enabled = false;
+        }
+
+        // force load all textures
+        private void checkBoxForceLoadTextures_CheckedChanged(object sender, EventArgs e)
+        { Main.module_environment_ACTION_force_load_textures = checkBoxForceLoadTextures.Checked.ToString().ToUpper(); }
 
         // imitates button click, function for usage from another forms
         public void ImitateButtonClick(string name)
@@ -61,6 +68,16 @@ namespace kangur
                     CheckBox tempCheckbox = control as CheckBox;
                     tempCheckbox.Checked = !tempCheckbox.Checked;
                 }
+            }
+        }
+
+        // makes sure we're not closing form, only hiding
+        private void ModuleEnvironment_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
             }
         }
     }

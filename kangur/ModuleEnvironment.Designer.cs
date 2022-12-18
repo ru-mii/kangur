@@ -32,6 +32,7 @@
             this.comboBoxLevelSelect = new System.Windows.Forms.ComboBox();
             this.buttonLoadLevel = new System.Windows.Forms.Button();
             this.buttonUnlockAllLevels = new System.Windows.Forms.Button();
+            this.checkBoxForceLoadTextures = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // comboBoxLevelSelect
@@ -92,11 +93,23 @@
             this.buttonUnlockAllLevels.UseVisualStyleBackColor = true;
             this.buttonUnlockAllLevels.Click += new System.EventHandler(this.buttonUnlockAllLevels_Click);
             // 
+            // checkBoxForceLoadTextures
+            // 
+            this.checkBoxForceLoadTextures.AutoSize = true;
+            this.checkBoxForceLoadTextures.Location = new System.Drawing.Point(12, 68);
+            this.checkBoxForceLoadTextures.Name = "checkBoxForceLoadTextures";
+            this.checkBoxForceLoadTextures.Size = new System.Drawing.Size(126, 17);
+            this.checkBoxForceLoadTextures.TabIndex = 3;
+            this.checkBoxForceLoadTextures.Text = "force-load all textures";
+            this.checkBoxForceLoadTextures.UseVisualStyleBackColor = true;
+            this.checkBoxForceLoadTextures.CheckedChanged += new System.EventHandler(this.checkBoxForceLoadTextures_CheckedChanged);
+            // 
             // ModuleEnvironment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(257, 70);
+            this.ClientSize = new System.Drawing.Size(257, 92);
+            this.Controls.Add(this.checkBoxForceLoadTextures);
             this.Controls.Add(this.buttonUnlockAllLevels);
             this.Controls.Add(this.buttonLoadLevel);
             this.Controls.Add(this.comboBoxLevelSelect);
@@ -104,8 +117,10 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ModuleEnvironment";
             this.Text = "environment";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ModuleEnvironment_FormClosing);
             this.Load += new System.EventHandler(this.ModuleEnvironment_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -114,5 +129,6 @@
         private System.Windows.Forms.ComboBox comboBoxLevelSelect;
         private System.Windows.Forms.Button buttonLoadLevel;
         private System.Windows.Forms.Button buttonUnlockAllLevels;
+        private System.Windows.Forms.CheckBox checkBoxForceLoadTextures;
     }
 }

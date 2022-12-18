@@ -85,6 +85,12 @@ namespace kangur
                     Properties.Settings.Default.environment_loadLevelKeyCode = code;
                     Properties.Settings.Default.environment_loadLevelText = name;
                 }
+
+                if (Hotkeys.clickedPadRow == 1)
+                {
+                    Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode = code;
+                    Properties.Settings.Default.environment_forceLoadAllTexturesText = name;
+                }
             }
 
             // update textbox showing hotkey

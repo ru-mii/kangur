@@ -46,13 +46,16 @@
             this.checkBoxUnlimitedBoomerangs = new System.Windows.Forms.CheckBox();
             this.buttonBoost = new System.Windows.Forms.Button();
             this.numericBoost = new System.Windows.Forms.NumericUpDown();
+            this.numericStars = new System.Windows.Forms.NumericUpDown();
+            this.buttonStars = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericBoost)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericStars)).BeginInit();
             this.SuspendLayout();
             // 
             // checkBoxImmortality
             // 
             this.checkBoxImmortality.AutoSize = true;
-            this.checkBoxImmortality.Location = new System.Drawing.Point(18, 193);
+            this.checkBoxImmortality.Location = new System.Drawing.Point(18, 222);
             this.checkBoxImmortality.Name = "checkBoxImmortality";
             this.checkBoxImmortality.Size = new System.Drawing.Size(74, 17);
             this.checkBoxImmortality.TabIndex = 0;
@@ -176,7 +179,7 @@
             // checkBoxUnlimitedBoomerangs
             // 
             this.checkBoxUnlimitedBoomerangs.AutoSize = true;
-            this.checkBoxUnlimitedBoomerangs.Location = new System.Drawing.Point(18, 216);
+            this.checkBoxUnlimitedBoomerangs.Location = new System.Drawing.Point(18, 245);
             this.checkBoxUnlimitedBoomerangs.Name = "checkBoxUnlimitedBoomerangs";
             this.checkBoxUnlimitedBoomerangs.Size = new System.Drawing.Size(128, 17);
             this.checkBoxUnlimitedBoomerangs.TabIndex = 19;
@@ -212,11 +215,41 @@
             0,
             0});
             // 
+            // numericStars
+            // 
+            this.numericStars.Location = new System.Drawing.Point(164, 192);
+            this.numericStars.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numericStars.Name = "numericStars";
+            this.numericStars.Size = new System.Drawing.Size(65, 20);
+            this.numericStars.TabIndex = 23;
+            this.numericStars.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericStars.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // buttonStars
+            // 
+            this.buttonStars.Location = new System.Drawing.Point(18, 190);
+            this.buttonStars.Name = "buttonStars";
+            this.buttonStars.Size = new System.Drawing.Size(139, 23);
+            this.buttonStars.TabIndex = 22;
+            this.buttonStars.Text = "set stars to";
+            this.buttonStars.UseVisualStyleBackColor = true;
+            this.buttonStars.Click += new System.EventHandler(this.buttonStars_Click);
+            // 
             // ModuleHero
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(247, 243);
+            this.ClientSize = new System.Drawing.Size(247, 284);
+            this.Controls.Add(this.numericStars);
+            this.Controls.Add(this.buttonStars);
             this.Controls.Add(this.numericBoost);
             this.Controls.Add(this.buttonBoost);
             this.Controls.Add(this.checkBoxUnlimitedBoomerangs);
@@ -241,6 +274,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ModuleHero_FormClosing);
             this.Load += new System.EventHandler(this.ModuleHero_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericBoost)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericStars)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,5 +299,7 @@
         private System.Windows.Forms.CheckBox checkBoxUnlimitedBoomerangs;
         private System.Windows.Forms.Button buttonBoost;
         private System.Windows.Forms.NumericUpDown numericBoost;
+        private System.Windows.Forms.NumericUpDown numericStars;
+        private System.Windows.Forms.Button buttonStars;
     }
 }

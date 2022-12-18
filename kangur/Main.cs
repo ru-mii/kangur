@@ -18,7 +18,7 @@ namespace kangur
     {
         // build version, adding new line because github adds it to their file
         // and the version is being compared with one written in github file in repo
-        public static string softwareVersion = "2" + "\n";
+        public static string softwareVersion = "3" + "\n";
 
         // start time of a process, helps detecting
         // if the game reopened and we need to patch again
@@ -27,14 +27,16 @@ namespace kangur
 
         // all module static related variables
         // will start with "module" and its name
-        public static string module_Hero_ACTION_immortality = "";
-        public static string module_Hero_ACTION_unlimitedBoomerangs = "";
-        public static string module_Hero_ACTION_snapshot = "";
+        public static string module_hero_ACTION_immortality = "";
+        public static string module_hero_ACTION_unlimitedBoomerangs = "";
+        public static string module_hero_ACTION_snapshot = "";
         public static string module_hero_ACTION_load = "";
         public static string module_hero_ACTION_boost = "";
+        public static string module_hero_ACTION_stars = "";
 
         public static int module_environment_ACTION_loadLevel = 0;
         public static string module_environment_ACTION_unlock_all_levels = "";
+        public static string module_environment_ACTION_force_load_textures = "";
 
         // allocating forms
         ModuleHero formModuleHero = new ModuleHero();
@@ -50,6 +52,9 @@ namespace kangur
 
         // holds all buttons, 0 = not pressed, 1 = pressed
         public int[] gamepadTable = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+        // gamepad one time click forcers
+        public int[] gamepadTableReady = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
         // initializing component, ignore
         public Main() { InitializeComponent(); }
@@ -143,7 +148,7 @@ namespace kangur
                     #region MODULE_HERO
 
                     // makes you immortal to mobs
-                    if (module_Hero_ACTION_immortality != "")
+                    if (module_hero_ACTION_immortality != "")
                     {
                         // change memory section protection
                         //toolkit.DisableMemoryProtection(moduleAddress + 0xF8B88, 3);
@@ -154,15 +159,15 @@ namespace kangur
                         byte[] newInstr = { 0x90, 0x90, 0x90 }; // nop nop nop
 
                         // patch instructions
-                        if (module_Hero_ACTION_immortality == "TRUE") toolkit.WriteMemory(moduleAddress + 0xF8B88, newInstr);
+                        if (module_hero_ACTION_immortality == "TRUE") toolkit.WriteMemory(moduleAddress + 0xF8B88, newInstr);
                         else toolkit.WriteMemory(moduleAddress + 0xF8B88, oldInstr); // FALSE
 
                         // reset action variable
-                        module_Hero_ACTION_immortality = "";
+                        module_hero_ACTION_immortality = "";
                     }
 
                     // you can use boomerangs limitlessly
-                    else if (module_Hero_ACTION_unlimitedBoomerangs != "")
+                    else if (module_hero_ACTION_unlimitedBoomerangs != "")
                     {
                         // change memory section protection
                         //toolkit.DisableMemoryProtection(moduleAddress + 0xF88AB, 4);
@@ -179,7 +184,7 @@ namespace kangur
                         byte[] newInstr2 = { 0x90, 0x90, 0x90 }; // nop nop nop
 
                         // patch instructions
-                        if (module_Hero_ACTION_unlimitedBoomerangs == "TRUE")
+                        if (module_hero_ACTION_unlimitedBoomerangs == "TRUE")
                         {
                             toolkit.WriteMemory(moduleAddress + 0xF88AB, newInstr1);
                             toolkit.WriteMemory(moduleAddress + 0xFAF38, newInstr2);
@@ -191,11 +196,11 @@ namespace kangur
                         }
 
                         // reset action variable
-                        module_Hero_ACTION_unlimitedBoomerangs = "";
+                        module_hero_ACTION_unlimitedBoomerangs = "";
                     }
 
                     // take position snapshot
-                    else if (module_Hero_ACTION_snapshot != "")
+                    else if (module_hero_ACTION_snapshot != "")
                     {
                         // get required pointer
                         uint gameletPointer = toolkit.ReadMemoryInt32(moduleAddress + 0x73D868);
@@ -212,7 +217,7 @@ namespace kangur
                         formModuleHero.loadPositionToForm(rotX, rotY, posX, posY, posZ);
 
                         // reset action variable
-                        module_Hero_ACTION_snapshot = "";
+                        module_hero_ACTION_snapshot = "";
                     }
 
                     // load new position
@@ -273,6 +278,20 @@ namespace kangur
                         // reset action variable
                         module_hero_ACTION_boost = "";
                     }
+
+                    // boosts vertical position by a number
+                    else if (module_hero_ACTION_stars != "")
+                    {
+                        // read stars from numeric
+                        int newStars = formModuleHero.getNumericStars();
+
+                        // write new stars into memory
+                        toolkit.WriteMemory(moduleAddress + 0x734DD0, BitConverter.GetBytes(newStars));
+
+                        // reset action variable
+                        module_hero_ACTION_stars = "";
+                    }
+
                     #endregion // ends region
                     #region MODULE_ENVIRONMENT
 
@@ -309,6 +328,21 @@ namespace kangur
                         // reset action variable
                         module_environment_ACTION_unlock_all_levels = "";
                     }
+
+                    // unlocks all levels on the list
+                    else if (module_environment_ACTION_force_load_textures != "")
+                    {
+                        // instructions
+                        byte[] enable = { 0xEB }; // jmp [address]
+                        byte[] disable = { 0x75 }; // jne [address]
+
+                        // enable
+                        if (module_environment_ACTION_force_load_textures == "TRUE")
+                            toolkit.WriteMemory(moduleAddress + 0x1B40C6, enable);
+
+                        // disable
+                        else toolkit.WriteMemory(moduleAddress + 0x1B40C6, disable);
+                    }
                     #endregion
                 }
 
@@ -336,7 +370,7 @@ namespace kangur
         // opens module form
         private void OpenModuleForm(string moduleForm)
         {
-            // check if window is not already open
+            // check if window is not already openMain.module_H
             // if not, open new form = window
             // if already opened before but hidden
             // then just show again, makes sure
@@ -354,13 +388,33 @@ namespace kangur
             {
                 if (moduleForm == "ModuleHero")
                 {
-                    if (!toolkit.IsFormOpen(moduleForm)) formModuleHero.Show();
-                    else if (!formModuleHero.Visible) formModuleHero.Show();
+                    // check if form module has been disposed
+                    if (!formModuleHero.IsDisposed)
+                    {
+                        if (!toolkit.IsFormOpen(moduleForm)) formModuleHero.Show();
+                        else if (!formModuleHero.Visible) formModuleHero.Show();
+                    }
+                    else
+                    {
+                        // initiate form and open
+                        formModuleHero = new ModuleHero();
+                        formModuleHero.Show();
+                    }
                 }
                 else if (moduleForm == "ModuleEnvironment")
                 {
-                    if (!toolkit.IsFormOpen(moduleForm)) formModuleEnvironment.Show();
-                    else if (!formModuleEnvironment.Visible) formModuleEnvironment.Show();
+                    // check if form module has been disposed
+                    if (!formModuleEnvironment.IsDisposed)
+                    {
+                        if (!toolkit.IsFormOpen(moduleForm)) formModuleEnvironment.Show();
+                        else if (!formModuleEnvironment.Visible) formModuleEnvironment.Show();
+                    }
+                    else
+                    {
+                        // initiate form and open
+                        formModuleEnvironment = new ModuleEnvironment();
+                        formModuleEnvironment.Show();
+                    }
                 }
             }
             else ShowError("kao2 needs to be open");
@@ -409,6 +463,10 @@ namespace kangur
                     // load level
                     if (toolkit.IsKeyPressed(Properties.Settings.Default.environment_loadLevelKeyCode))
                         formModuleEnvironment.ImitateButtonClick("buttonLoadLevel");
+
+                    // force-load all textures
+                    if (toolkit.IsKeyPressed(Properties.Settings.Default.environment_loadLevelKeyCode))
+                        formModuleEnvironment.ImitateCheckboxClick("checkBoxForceLoadTextures");
                 }
 
                 // check gamepad press
@@ -438,6 +496,18 @@ namespace kangur
                         if (Properties.Settings.Default.environment_loadLevelKeyCode >= 1000 &&
                             gamepadTable[Properties.Settings.Default.environment_loadLevelKeyCode - 1000] > 0)
                             formModuleEnvironment.ImitateButtonClick("buttonLoadLevel");
+
+                        // force load all textures
+                        if (Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode >= 1000 &&
+                        gamepadTable[Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode - 1000] > 0)
+                        {
+                            // check if one time click is ready
+                            if (gamepadTableReady[Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode - 1000] == 0)
+                            {
+                                formModuleEnvironment.ImitateCheckboxClick("checkBoxForceLoadTextures");
+                                gamepadTableReady[Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode - 1000] = 1;
+                            }
+                        }
                     }
                 }
 
@@ -461,67 +531,67 @@ namespace kangur
                 {
                     // 0
                     if (gamepad.LTrigger_N != 0) gamepadTable[0] = 1;
-                    else if (gamepad.LTrigger_N == 0) gamepadTable[0] = 0;
+                    else { gamepadTable[0] = 0; gamepadTableReady[0] = 0; }
 
                     // 1
                     if (gamepad.RTrigger_N != 0) gamepadTable[1] = 1;
-                    else if (gamepad.RTrigger_N == 0) gamepadTable[1] = 0;
+                    else { gamepadTable[1] = 0; gamepadTableReady[1] = 0; }
 
                     // 2
                     if (gamepad.LBumper_down) gamepadTable[2] = 1;
-                    else gamepadTable[2] = 0;
+                    else { gamepadTable[2] = 0; gamepadTableReady[2] = 0; }
 
                     // 3
                     if (gamepad.RBumper_down) gamepadTable[3] = 1;
-                    else gamepadTable[3] = 0;
+                    else { gamepadTable[3] = 0; gamepadTableReady[3] = 0; }
 
                     // 4
                     if (gamepad.LStick_down) gamepadTable[4] = 1;
-                    else gamepadTable[4] = 0;
+                    else { gamepadTable[4] = 0; gamepadTableReady[4] = 0; }
 
                     // 5
                     if (gamepad.RStick_down) gamepadTable[5] = 1;
-                    else gamepadTable[5] = 0;
+                    else { gamepadTable[5] = 0; gamepadTableReady[5] = 0; }
 
                     // 6
                     if (gamepad.Back_down) gamepadTable[6] = 1;
-                    else gamepadTable[6] = 0;
+                    else { gamepadTable[6] = 0; gamepadTableReady[6] = 0; }
 
                     // 7
                     if (gamepad.Start_down) gamepadTable[7] = 1;
-                    else gamepadTable[7] = 0;
+                    else { gamepadTable[7] = 0; gamepadTableReady[7] = 0; }
 
                     // 8
                     if (gamepad.Dpad_Left_down) gamepadTable[8] = 1;
-                    else gamepadTable[8] = 0;
+                    else { gamepadTable[8] = 0; gamepadTableReady[8] = 0; }
 
                     // 9
                     if (gamepad.Dpad_Up_down) gamepadTable[9] = 1;
-                    else gamepadTable[9] = 0;
+                    else { gamepadTable[9] = 0; gamepadTableReady[9] = 0; }
 
                     // 10
                     if (gamepad.Dpad_Right_down) gamepadTable[10] = 1;
-                    else gamepadTable[10] = 0;
+                    else { gamepadTable[10] = 0; gamepadTableReady[10] = 0; }
 
                     // 11
                     if (gamepad.Dpad_Down_down) gamepadTable[11] = 1;
-                    else gamepadTable[11] = 0;
+                    else { gamepadTable[11] = 0; gamepadTableReady[11] = 0; }
 
                     // 12
                     if (gamepad.X_down) gamepadTable[12] = 1;
-                    else gamepadTable[12] = 0;
+                    else { gamepadTable[12] = 0; gamepadTableReady[12] = 0; }
 
                     // 13
                     if (gamepad.Y_down) gamepadTable[13] = 1;
-                    else gamepadTable[13] = 0;
+                    else { gamepadTable[13] = 0; gamepadTableReady[13] = 0; }
 
                     // 14
                     if (gamepad.B_down) gamepadTable[14] = 1;
-                    else gamepadTable[14] = 0;
+                    else { gamepadTable[14] = 0; gamepadTableReady[14] = 0; }
 
                     // 15
                     if (gamepad.A_down) gamepadTable[15] = 1;
-                    else gamepadTable[15] = 0;
+                    else { gamepadTable[15] = 0; gamepadTableReady[15] = 0; }
                 }
 
                 // sleep for performance

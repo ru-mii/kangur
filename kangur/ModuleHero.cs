@@ -30,21 +30,24 @@ namespace kangur
             }
         }
 
-        // assigning flags to concrete functions
+        // assigning flags to specific functions
         private void checkBoxImmortality_CheckedChanged(object sender, EventArgs e)
-        { Main.module_Hero_ACTION_immortality = checkBoxImmortality.Checked.ToString().ToUpper(); }
+        { Main.module_hero_ACTION_immortality = checkBoxImmortality.Checked.ToString().ToUpper(); }
 
         private void checkBoxUnlimitedBoomerangs_CheckedChanged(object sender, EventArgs e)
-        { Main.module_Hero_ACTION_unlimitedBoomerangs = checkBoxUnlimitedBoomerangs.Checked.ToString().ToUpper(); }
+        { Main.module_hero_ACTION_unlimitedBoomerangs = checkBoxUnlimitedBoomerangs.Checked.ToString().ToUpper(); }
 
         private void buttonSnapshot_Click(object sender, EventArgs e)
-        { Main.module_Hero_ACTION_snapshot = "TRUE"; }
+        { Main.module_hero_ACTION_snapshot = "TRUE"; }
 
         private void buttonLoad_Click(object sender, EventArgs e)
         { Main.module_hero_ACTION_load = "TRUE"; }
 
         private void buttonBoost_Click(object sender, EventArgs e)
         { Main.module_hero_ACTION_boost = "TRUE"; }
+
+        private void buttonStars_Click(object sender, EventArgs e)
+        { Main.module_hero_ACTION_stars = "TRUE"; }
 
         // loads position to form between form classes
         public void loadPositionToForm(float rotX, float rotY, float posX, float posY, float posZ)
@@ -73,6 +76,10 @@ namespace kangur
         // get numeric boost value
         public int getNumericBoost ()
         {  return (int)numericBoost.Value; }
+
+        // get numeric stars value
+        public int getNumericStars()
+        { return (int)numericStars.Value; }
 
         // imitates button click, function for usage from another forms
         public void ImitateButtonClick (string name)
