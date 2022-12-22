@@ -27,6 +27,22 @@ namespace kangur
             return false;
         }
 
+        // check if form is visible
+        public bool IsFormVisible(string name)
+        {
+            // go through all of the forms
+            foreach (Form window in Application.OpenForms)
+            {
+                // check name of each form and return true
+                // if it matches our search + form is visible
+                if (window.Name == name && window.Visible)
+                    return true;
+            }
+
+            // above didn't hit true so we just return false
+            return false;
+        }
+
         // change memory protection
         public bool DisableMemoryProtection (uint address, int size)
         { return VirtualProtectEx(Main.mainGameProcess.Handle, (IntPtr)address, size, 0x40, out IntPtr zero); }

@@ -147,6 +147,12 @@ namespace kangur
                 Properties.Settings.Default.hero_boostKeyCode = 0;
             }
 
+            else if (selectedModule == "environment")
+            {
+                Properties.Settings.Default.environment_forceLoadAllTexturesText = "";
+                Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode = 0;
+            }
+
             // save changes and clear text
             Properties.Settings.Default.Save();
             key2.Text = "";

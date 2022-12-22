@@ -18,7 +18,7 @@ namespace kangur
     {
         // build version, adding new line because github adds it to their file
         // and the version is being compared with one written in github file in repo
-        public static string softwareVersion = "3" + "\n";
+        public static string softwareVersion = "4" + "\n";
 
         // start time of a process, helps detecting
         // if the game reopened and we need to patch again
@@ -255,11 +255,11 @@ namespace kangur
 
                             // write full vector5 position as byte arary
                             toolkit.WriteMemory(positionPointer, fullByteTable);
-
-                            // reset action variable
-                            module_hero_ACTION_load = "";
                         }
                         else ShowError("one of the position values is not in correct format");
+
+                        // reset action variable
+                        module_hero_ACTION_load = "";
                     }
 
                     // boosts vertical position by a number
@@ -444,7 +444,7 @@ namespace kangur
             while (true)
             {
                 // check keyboard press
-                if (toolkit.IsFormOpen("ModuleHero"))
+                if (toolkit.IsFormVisible("ModuleHero"))
                 {
                     if (toolkit.IsKeyPressed(Properties.Settings.Default.hero_snapshotKeyCode))
                         formModuleHero.ImitateButtonClick("buttonSnapshot");
@@ -458,7 +458,7 @@ namespace kangur
                         formModuleHero.ImitateButtonClick("buttonBoost");
                 }
 
-                if (toolkit.IsFormOpen("ModuleEnvironment"))
+                if (toolkit.IsFormVisible("ModuleEnvironment"))
                 {
                     // load level
                     if (toolkit.IsKeyPressed(Properties.Settings.Default.environment_loadLevelKeyCode))
@@ -472,7 +472,7 @@ namespace kangur
                 // check gamepad press
                 if (gamepadTable.Sum() > 0)
                 {
-                    if (toolkit.IsFormOpen("ModuleHero"))
+                    if (toolkit.IsFormVisible("ModuleHero"))
                     {
                         if (Properties.Settings.Default.hero_snapshotKeyCode >= 1000 &&
                             gamepadTable[Properties.Settings.Default.hero_snapshotKeyCode - 1000] > 0)
@@ -490,7 +490,7 @@ namespace kangur
                     }
 
                     // take position snapshot with hotkey
-                    if (toolkit.IsFormOpen("ModuleEnvironment"))
+                    if (toolkit.IsFormVisible("ModuleEnvironment"))
                     {
                         // load level
                         if (Properties.Settings.Default.environment_loadLevelKeyCode >= 1000 &&
