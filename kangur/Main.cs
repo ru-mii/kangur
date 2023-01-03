@@ -136,9 +136,8 @@ namespace kangur
 
                         // allocate memory
                         uint allocated = toolkit.AllocateMemory();
-                        //MessageBox.Show(allocated.ToString("X"));
-                        //toolkit.WriteMemory(allocated, BitConverter.GetBytes(41f));
-                        //toolkit.WriteMemory(moduleAddress + 0xA165E, BitConverter.GetBytes(allocated));
+                        toolkit.WriteMemory(allocated, BitConverter.GetBytes(41f));
+                        toolkit.WriteMemory(moduleAddress + 0xA165E, BitConverter.GetBytes(allocated));
                     }
                     // new session but no process open
                     // meaning game was open and you closed it
