@@ -33,6 +33,7 @@
             this.buttonLoadLevel = new System.Windows.Forms.Button();
             this.buttonUnlockAllLevels = new System.Windows.Forms.Button();
             this.checkBoxForceLoadTextures = new System.Windows.Forms.CheckBox();
+            this.buttonLoadLastCheckpoint = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // comboBoxLevelSelect
@@ -96,7 +97,7 @@
             // checkBoxForceLoadTextures
             // 
             this.checkBoxForceLoadTextures.AutoSize = true;
-            this.checkBoxForceLoadTextures.Location = new System.Drawing.Point(12, 68);
+            this.checkBoxForceLoadTextures.Location = new System.Drawing.Point(12, 97);
             this.checkBoxForceLoadTextures.Name = "checkBoxForceLoadTextures";
             this.checkBoxForceLoadTextures.Size = new System.Drawing.Size(126, 17);
             this.checkBoxForceLoadTextures.TabIndex = 3;
@@ -104,17 +105,29 @@
             this.checkBoxForceLoadTextures.UseVisualStyleBackColor = true;
             this.checkBoxForceLoadTextures.CheckedChanged += new System.EventHandler(this.checkBoxForceLoadTextures_CheckedChanged);
             // 
+            // buttonLoadLastCheckpoint
+            // 
+            this.buttonLoadLastCheckpoint.Location = new System.Drawing.Point(12, 68);
+            this.buttonLoadLastCheckpoint.Name = "buttonLoadLastCheckpoint";
+            this.buttonLoadLastCheckpoint.Size = new System.Drawing.Size(233, 23);
+            this.buttonLoadLastCheckpoint.TabIndex = 4;
+            this.buttonLoadLastCheckpoint.Text = "load last checkpoint";
+            this.buttonLoadLastCheckpoint.UseVisualStyleBackColor = true;
+            this.buttonLoadLastCheckpoint.Click += new System.EventHandler(this.buttonLoadLastCheckpoint_Click);
+            // 
             // ModuleEnvironment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(257, 92);
+            this.ClientSize = new System.Drawing.Size(257, 122);
+            this.Controls.Add(this.buttonLoadLastCheckpoint);
             this.Controls.Add(this.checkBoxForceLoadTextures);
             this.Controls.Add(this.buttonUnlockAllLevels);
             this.Controls.Add(this.buttonLoadLevel);
             this.Controls.Add(this.comboBoxLevelSelect);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ModuleEnvironment";
             this.Text = "environment";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ModuleEnvironment_FormClosing);
@@ -130,5 +143,6 @@
         private System.Windows.Forms.Button buttonLoadLevel;
         private System.Windows.Forms.Button buttonUnlockAllLevels;
         private System.Windows.Forms.CheckBox checkBoxForceLoadTextures;
+        private System.Windows.Forms.Button buttonLoadLastCheckpoint;
     }
 }

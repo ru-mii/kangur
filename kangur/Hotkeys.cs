@@ -85,8 +85,15 @@ namespace kangur
                 // write and save to settings
                 Properties.Settings.Default.hero_boostKeyText = e.KeyCode.ToString();
                 Properties.Settings.Default.hero_boostKeyCode = e.KeyValue;
-                Properties.Settings.Default.Save();
             }
+
+            // write and save to settings
+            else if (selectedModule == "environment")
+            {
+                Properties.Settings.Default.environment_loadLastCheckpointText = e.KeyCode.ToString();
+                Properties.Settings.Default.environment_loadLevelKeyCode = e.KeyValue;
+            }
+
             // save changes
             Properties.Settings.Default.Save();
 
@@ -133,6 +140,12 @@ namespace kangur
                 Properties.Settings.Default.hero_loadKeyCode = 0;
             }
 
+            else if (selectedModule == "environment")
+            {
+                Properties.Settings.Default.environment_forceLoadAllTexturesText = "";
+                Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode = 0;
+            }
+
             // save changes and clear text
             Properties.Settings.Default.Save();
             key1.Text = "";
@@ -149,8 +162,8 @@ namespace kangur
 
             else if (selectedModule == "environment")
             {
-                Properties.Settings.Default.environment_forceLoadAllTexturesText = "";
-                Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode = 0;
+                Properties.Settings.Default.environment_loadLastCheckpointText = "";
+                Properties.Settings.Default.environment_loadLastCheckpointKeyCode = 0;
             }
 
             // save changes and clear text
@@ -197,12 +210,12 @@ namespace kangur
             // description
             text0.Text = "load level";
             text1.Text = "force-load all textures";
-            text2.Text = "";
+            text2.Text = "load last checkpoint";
 
             // key text
             key0.Text = Properties.Settings.Default.environment_loadLevelText;
             key1.Text = Properties.Settings.Default.environment_forceLoadAllTexturesText;
-            key2.Text = "";
+            key2.Text = Properties.Settings.Default.environment_loadLastCheckpointText;
 
             // select oob control for better visuals and functionality
             ntjbah.Select();
@@ -210,9 +223,9 @@ namespace kangur
             // change controls visibility, if we have
             // too many options for the module we just 
             // hide the hotkey columns that are not required
-            key0.Visible = true;            key1.Visible = true;            key2.Visible = false;
-            buttonClear0.Visible = true;    buttonClear1.Visible = true;    buttonClear2.Visible = false;
-            pad0.Visible = true;            pad1.Visible = true;            pad2.Visible = false;
+            key0.Visible = true;            key1.Visible = true;            key2.Visible = true;
+            buttonClear0.Visible = true;    buttonClear1.Visible = true;    buttonClear2.Visible = true;
+            pad0.Visible = true;            pad1.Visible = true;            pad2.Visible = true;
 
             // change buttons visuals
             SelectButtonVisually("buttonSelectEnvironment");

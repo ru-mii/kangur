@@ -82,6 +82,10 @@ namespace kangur
             return BitConverter.ToSingle(rawBytes, 0);
         }
 
+        // allocates memory
+        public uint AllocateMemory()
+        { return (uint)VirtualAllocEx(Main.mainGameProcess.Handle, IntPtr.Zero, 0x1000, 0x1000 | 0x2000, 0x40); }
+
         // checks if key is pressed
         public bool IsKeyPressed(int keyCode) 
         {
@@ -121,6 +125,11 @@ namespace kangur
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool ReadProcessMemory(
         IntPtr hProcess, IntPtr lpBaseAddress, byte[] lpBuffer, int nSize, out IntPtr lpNumberOfBytesRead);
+
+        // imported memory allocation
+        [DllImport("kernel32.dll")]
+        public static extern IntPtr VirtualAllocEx(IntPtr hProcess, IntPtr lpAddress,
+        uint dwSize, uint flAllocationType, uint flProtect);
 
         // imported key state
         [DllImport("user32.dll")]

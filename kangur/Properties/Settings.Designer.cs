@@ -454,5 +454,29 @@ namespace kangur.Properties {
                 this["environment_forceLoadAllTexturesKeyCode"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string environment_loadLastCheckpointText {
+            get {
+                return ((string)(this["environment_loadLastCheckpointText"]));
+            }
+            set {
+                this["environment_loadLastCheckpointText"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int environment_loadLastCheckpointKeyCode {
+            get {
+                return ((int)(this["environment_loadLastCheckpointKeyCode"]));
+            }
+            set {
+                this["environment_loadLastCheckpointKeyCode"] = value;
+            }
+        }
     }
 }

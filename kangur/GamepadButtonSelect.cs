@@ -91,6 +91,12 @@ namespace kangur
                     Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode = code;
                     Properties.Settings.Default.environment_forceLoadAllTexturesText = name;
                 }
+
+                if (Hotkeys.clickedPadRow == 2)
+                {
+                    Properties.Settings.Default.environment_loadLastCheckpointKeyCode = code;
+                    Properties.Settings.Default.environment_loadLastCheckpointText = name;
+                }
             }
 
             // update textbox showing hotkey

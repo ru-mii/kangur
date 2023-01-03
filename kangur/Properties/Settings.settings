@@ -110,5 +110,11 @@
     <Setting Name="environment_forceLoadAllTexturesKeyCode" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="environment_loadLastCheckpointText" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="environment_loadLastCheckpointKeyCode" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

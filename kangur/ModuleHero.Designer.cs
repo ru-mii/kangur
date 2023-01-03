@@ -269,6 +269,7 @@
             this.Controls.Add(this.checkBoxImmortality);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ModuleHero";
             this.Text = "hero";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ModuleHero_FormClosing);

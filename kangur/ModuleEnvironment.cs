@@ -39,6 +39,10 @@ namespace kangur
         private void checkBoxForceLoadTextures_CheckedChanged(object sender, EventArgs e)
         { Main.module_environment_ACTION_force_load_textures = checkBoxForceLoadTextures.Checked.ToString().ToUpper(); }
 
+        // loads last checkpoint
+        private void buttonLoadLastCheckpoint_Click(object sender, EventArgs e)
+        { Main.module_environment_ACTION_load_last_checkpoint = "TRUE"; }
+
         // imitates button click, function for usage from another forms
         public void ImitateButtonClick(string name)
         {

@@ -18,7 +18,7 @@ namespace kangur
     {
         // build version, adding new line because github adds it to their file
         // and the version is being compared with one written in github file in repo
-        public static string softwareVersion = "4" + "\n";
+        public static string softwareVersion = "5" + "\n";
 
         // start time of a process, helps detecting
         // if the game reopened and we need to patch again
@@ -37,6 +37,7 @@ namespace kangur
         public static int module_environment_ACTION_loadLevel = 0;
         public static string module_environment_ACTION_unlock_all_levels = "";
         public static string module_environment_ACTION_force_load_textures = "";
+        public static string module_environment_ACTION_load_last_checkpoint = "";
 
         // allocating forms
         ModuleHero formModuleHero = new ModuleHero();
@@ -132,6 +133,12 @@ namespace kangur
                     if (processSession != "")
                     {
                         ChangeStatus("kao2 found, have fun", Color.Green);
+
+                        // allocate memory
+                        uint allocated = toolkit.AllocateMemory();
+                        //MessageBox.Show(allocated.ToString("X"));
+                        //toolkit.WriteMemory(allocated, BitConverter.GetBytes(41f));
+                        //toolkit.WriteMemory(moduleAddress + 0xA165E, BitConverter.GetBytes(allocated));
                     }
                     // new session but no process open
                     // meaning game was open and you closed it
@@ -342,7 +349,24 @@ namespace kangur
 
                         // disable
                         else toolkit.WriteMemory(moduleAddress + 0x1B40C6, disable);
+
+                        // reset action variable
+                        module_environment_ACTION_force_load_textures = "";
                     }
+
+                    // loads last checkpoint
+                    else if (module_environment_ACTION_load_last_checkpoint == "TRUE")
+                    {
+                        // get checkpoint loader address
+                        uint checkpoint = toolkit.ReadMemoryInt32(moduleAddress + 0x73D868) + 0x3F0;
+
+                        // write reload value = 2
+                        toolkit.WriteMemory(checkpoint, BitConverter.GetBytes(2));
+
+                        // reset action variable
+                        module_environment_ACTION_load_last_checkpoint = "";
+                    }
+
                     #endregion
                 }
 
@@ -467,6 +491,10 @@ namespace kangur
                     // force-load all textures
                     if (toolkit.IsKeyPressed(Properties.Settings.Default.environment_loadLevelKeyCode))
                         formModuleEnvironment.ImitateCheckboxClick("checkBoxForceLoadTextures");
+
+                    // load last checkpoint
+                    if (toolkit.IsKeyPressed(Properties.Settings.Default.environment_loadLastCheckpointKeyCode))
+                        formModuleEnvironment.ImitateButtonClick("buttonLoadLastCheckpoint");
                 }
 
                 // check gamepad press
@@ -506,6 +534,18 @@ namespace kangur
                             {
                                 formModuleEnvironment.ImitateCheckboxClick("checkBoxForceLoadTextures");
                                 gamepadTableReady[Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode - 1000] = 1;
+                            }
+                        }
+
+                        // force load all textures
+                        if (Properties.Settings.Default.environment_loadLastCheckpointKeyCode >= 1000 &&
+                        gamepadTable[Properties.Settings.Default.environment_loadLastCheckpointKeyCode - 1000] > 0)
+                        {
+                            // check if one time click is ready
+                            if (gamepadTableReady[Properties.Settings.Default.environment_loadLastCheckpointKeyCode - 1000] == 0)
+                            {
+                                formModuleEnvironment.ImitateButtonClick("buttonLoadLastCheckpoint");
+                                gamepadTableReady[Properties.Settings.Default.environment_loadLastCheckpointKeyCode - 1000] = 1;
                             }
                         }
                     }
