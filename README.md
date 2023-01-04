@@ -23,4 +23,4 @@ Related to our main character.
 # 2. Environment
 All about map and its environment.
 
-![image](https://user-images.githubusercontent.com/118167137/208282064-b77080ae-43e1-459f-993d-4b9f1734fbb6.png)
+![image](https://user-images.githubusercontent.com/118167137/210568224-56d24dcd-b2d2-4b09-ba52-96de4b256ef9.png)
