@@ -285,7 +285,7 @@ namespace kangur
                         module_hero_ACTION_boost = "";
                     }
 
-                    // boosts vertical position by a number
+                    // change player stars
                     else if (module_hero_ACTION_stars != "")
                     {
                         // read stars from numeric
@@ -335,7 +335,7 @@ namespace kangur
                         module_environment_ACTION_unlock_all_levels = "";
                     }
 
-                    // unlocks all levels on the list
+                    // force loads all textures
                     else if (module_environment_ACTION_force_load_textures != "")
                     {
                         // instructions
