@@ -18,7 +18,7 @@ namespace kangur
     {
         // build version, adding new line because github adds it to their file
         // and the version is being compared with one written in github file in repo
-        public static string softwareVersion = "5" + "\n";
+        public static string softwareVersion = "6" + "\n";
 
         // start time of a process, helps detecting
         // if the game reopened and we need to patch again
@@ -57,6 +57,9 @@ namespace kangur
         // gamepad one time click forcers
         public int[] gamepadTableReady = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
+        // gamepad one time click forcers
+        public static bool[] keybardTableReady = new bool[1000];
+
         // initializing component, ignore
         public Main() { InitializeComponent(); }
 
@@ -75,6 +78,10 @@ namespace kangur
 
             // check for new updates
             Updates.CheckForUpdates();
+
+            // fill out keyboard ready table
+            for (int i = 0; i < keybardTableReady.Length; i++)
+                keybardTableReady[i] = true;
 
             // start background thread
             backgroundWorker.RunWorkerAsync();
@@ -487,13 +494,24 @@ namespace kangur
                     if (toolkit.IsKeyPressed(Properties.Settings.Default.environment_loadLevelKeyCode))
                         formModuleEnvironment.ImitateButtonClick("buttonLoadLevel");
 
-                    // force-load all textures
-                    if (toolkit.IsKeyPressed(Properties.Settings.Default.environment_loadLevelKeyCode))
-                        formModuleEnvironment.ImitateCheckboxClick("checkBoxForceLoadTextures");
+                    // extract key and compare with ready table
+                    int foreLoadTexturesExtracted = Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode;
+                    if (toolkit.IsKeyPressed(foreLoadTexturesExtracted))
+                    {
+                        if (!keybardTableReady[foreLoadTexturesExtracted])
+                        {
+                            keybardTableReady[foreLoadTexturesExtracted] = true;
+                            formModuleEnvironment.ImitateCheckboxClick("checkBoxForceLoadTextures");
+                        }
+
+                    }
+                    else keybardTableReady[foreLoadTexturesExtracted] = false;
 
                     // load last checkpoint
                     if (toolkit.IsKeyPressed(Properties.Settings.Default.environment_loadLastCheckpointKeyCode))
+                    {
                         formModuleEnvironment.ImitateButtonClick("buttonLoadLastCheckpoint");
+                    }
                 }
 
                 // check gamepad press

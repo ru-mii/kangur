@@ -93,7 +93,7 @@ namespace kangur
             short keyStatus = GetAsyncKeyState(keyCode);
 
             // return if pressed
-            if ((keyStatus & 0x8000) > 0) return true;
+            if ((keyStatus & 1) != 0) return true;
             else return false;
         }
 

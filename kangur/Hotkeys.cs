@@ -69,6 +69,13 @@ namespace kangur
                 Properties.Settings.Default.hero_loadKeyCode = e.KeyValue;
             }
 
+            // write and save to settings
+            else if (selectedModule == "environment")
+            {
+                Properties.Settings.Default.environment_forceLoadAllTexturesText = e.KeyCode.ToString();
+                Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode = e.KeyValue;
+            }
+
             // save changes    
             Properties.Settings.Default.Save();
 
@@ -91,7 +98,7 @@ namespace kangur
             else if (selectedModule == "environment")
             {
                 Properties.Settings.Default.environment_loadLastCheckpointText = e.KeyCode.ToString();
-                Properties.Settings.Default.environment_loadLevelKeyCode = e.KeyValue;
+                Properties.Settings.Default.environment_loadLastCheckpointKeyCode = e.KeyValue;
             }
 
             // save changes
