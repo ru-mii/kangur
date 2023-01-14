@@ -44,7 +44,7 @@ namespace kangur
         }
 
         // change memory protection
-        public bool DisableMemoryProtection (uint address, int size)
+        public bool DisableMemoryProtection(uint address, int size)
         { return VirtualProtectEx(Main.mainGameProcess.Handle, (IntPtr)address, size, 0x40, out IntPtr zero); }
 
         // write memory easily, a cool wrapper
@@ -55,7 +55,7 @@ namespace kangur
                 array, array.Length, out IntPtr nullification);
         }
 
-        public uint ReadMemoryInt32 (uint address)
+        public uint ReadMemoryInt32(uint address)
         {
             // 4 because int is 4
             byte[] rawBytes = new byte[4];
@@ -65,11 +65,11 @@ namespace kangur
             rawBytes, rawBytes.Length, out IntPtr nullification);
 
             // return parsed bytes to int
-            return BitConverter.ToUInt32(rawBytes, 0); 
+            return BitConverter.ToUInt32(rawBytes, 0);
         }
 
         // reads float value from memory
-        public float ReadMemoryFloat (uint address)
+        public float ReadMemoryFloat(uint address)
         {
             // 4 because float is 4
             byte[] rawBytes = new byte[4];
@@ -87,7 +87,7 @@ namespace kangur
         { return (uint)VirtualAllocEx(Main.mainGameProcess.Handle, IntPtr.Zero, 0x1000, 0x1000 | 0x2000, 0x40); }
 
         // checks if key is pressed
-        public bool IsKeyPressed(int keyCode) 
+        public bool IsKeyPressed(int keyCode)
         {
             // read key status from table and compare
             short keyStatus = GetAsyncKeyState(keyCode);

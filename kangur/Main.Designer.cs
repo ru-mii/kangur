@@ -38,6 +38,7 @@
             this.rrcrxo = new System.Windows.Forms.Label();
             this.buttonModuleOpenSettingsEnvironment = new System.Windows.Forms.Button();
             this.buttonStateThread = new System.ComponentModel.BackgroundWorker();
+            this.FormStyleBackChange = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // labelProcessStatus
@@ -120,7 +121,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonModuleOpenSettingsHero);
             this.Controls.Add(this.labelProcessStatus);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -142,6 +142,7 @@
         private System.Windows.Forms.Label rrcrxo;
         private System.Windows.Forms.Button buttonModuleOpenSettingsEnvironment;
         private System.ComponentModel.BackgroundWorker buttonStateThread;
+        private System.ComponentModel.BackgroundWorker FormStyleBackChange;
     }
 }
 
