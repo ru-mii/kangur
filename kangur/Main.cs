@@ -10,7 +10,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using XInput.Wrapper;
 
 namespace kangur
 {
@@ -18,7 +17,7 @@ namespace kangur
     {
         // build version, adding new line because github adds it to their file
         // and the version is being compared with one written in github file in repo
-        public static string softwareVersion = "6" + "\n";
+        public static string softwareVersion = "7" + "\n";
 
         // start time of a process, helps detecting
         // if the game reopened and we need to patch again

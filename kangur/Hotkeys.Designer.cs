@@ -240,6 +240,7 @@
             this.Controls.Add(this.text0);
             this.Controls.Add(this.buttonSelectHero);
             this.Controls.Add(this.liner_pooura);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Hotkeys";
