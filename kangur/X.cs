@@ -21,8 +21,6 @@ namespace kangur
         public static readonly Gamepad Gamepad_3 = new Gamepad(2);
         public static readonly Gamepad Gamepad_4 = new Gamepad(3);
 
-        static X() { }
-
         #region // Polling Loop /////////////////////////////////////////////////////////////////////////////
 
         public static void StartPolling(Gamepad slot0, Gamepad slot1 = null, Gamepad slot2 = null, Gamepad slot3 = null)
@@ -66,7 +64,6 @@ namespace kangur
             }
         }
         #endregion
-
 
         /// <summary>
         /// Should not call often! This one not cached.
@@ -127,7 +124,6 @@ namespace kangur
                 batteryInfo = gamepad;
             }
 
-
             #region // Capabilities //////////////////////////////////////////////////////////////////////////////////
 
             public Capability Capabilities
@@ -161,9 +157,7 @@ namespace kangur
 
             #endregion
 
-
             #region // Buttons, sticks, thumbs, etc //////////////////////////////////////////////////////////////////
-
 
             public bool Dpad_Up_down { get { return state.Gamepad.IsButtonDown(GamepadButtons.Dpad_Up); } }
             public bool Dpad_Up_up { get { return state.Gamepad.IsButtonUp(buttons, GamepadButtons.Dpad_Up); } }
@@ -235,7 +229,7 @@ namespace kangur
 
             private bool IsDeadZone(Point pt, float ringDeadZone)
             {
-                return ringDeadZone > Math.Sqrt(pt.X * pt.X + pt.Y * pt.Y);
+                return ringDeadZone > Math.Sqrt((pt.X * pt.X) + (pt.Y * pt.Y));
             }
 
             public PointF LStick_N
@@ -351,9 +345,7 @@ namespace kangur
                 return isChanged;
             } // UpdateState()
 
-
             #region // Events ////////////////////////////////////////////////////////////////////
-
 
             public event EventHandler ConnectionChanged;
             protected virtual void __OnConnectionChanged(object o)
@@ -489,7 +481,6 @@ namespace kangur
             }
             #endregion
 
-
             internal class InputWrapper
             {
                 [DllImport("xinput1_4.dll")]
@@ -514,7 +505,6 @@ namespace kangur
                     ref Capability pCapabilities  // [out] Receives the capabilities
                 );
 
-
                 [DllImport("xinput1_4.dll")]
                 public static extern int XInputGetBatteryInformation
                 (
@@ -538,9 +528,7 @@ namespace kangur
                 );
             } // class InputWrapper
 
-
             #region // Structures ///////////////////////////////////////////////////////////////
-
 
             [StructLayout(LayoutKind.Explicit)]
             public struct Keystroke
@@ -602,7 +590,7 @@ namespace kangur
                 Wireless = 0x0002,
                 PMD_Supported = 0x0008, // Device supports plug-in modules.
                 NoNavigation = 0x0010,  // Device lacks menu navigation buttons (START, BACK, DPAD).
-            };
+            }
 
             public const int GAMEPAD_FLAG = 0x00000001;
 
@@ -753,7 +741,7 @@ namespace kangur
                     Alkaline = 0x02,    // Alkaline battery source
                     NiMh = 0x03,    // Nickel Metal Hydride battery source
                     Unknown = 0xFF,    // Cannot determine the battery type
-                };
+                }
 
                 // These are only valid for wireless, connected devices, with known battery types
                 // The amount of use time remaining depends on the type of device.
@@ -763,7 +751,7 @@ namespace kangur
                     Low = 0x01,
                     Medium = 0x02,
                     Full = 0x03
-                };
+                }
 
                 public enum At : byte
                 {
@@ -786,7 +774,7 @@ namespace kangur
                 DrumKit = 0x08,
                 GuitarBass = 0x0B,
                 ArcadePad = 0x13
-            };
+            }
 
             [Flags]
             public enum GamepadButtons : int
@@ -805,7 +793,7 @@ namespace kangur
                 B = 0x2000,
                 X = 0x4000,
                 Y = 0x8000,
-            };
+            }
             #endregion
         } // class Gamepad
 
