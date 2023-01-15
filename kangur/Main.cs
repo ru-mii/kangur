@@ -657,6 +657,7 @@ namespace kangur
                 Thread.Sleep(1);
             }
         }
+
         // check for new updates
         private void checkForUpdatesThread_DoWork(object sender, DoWorkEventArgs e)
         { Updates.CheckForUpdates(); }
