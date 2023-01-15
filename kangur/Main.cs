@@ -75,9 +75,6 @@ namespace kangur
             // select oob control for better visuals
             rrcrxo.Select();
 
-            // check for new updates
-            Updates.CheckForUpdates();
-
             // fill out keyboard ready table
             for (int i = 0; i < keybardTableReady.Length; i++)
                 keybardTableReady[i] = true;
@@ -87,6 +84,9 @@ namespace kangur
 
             // might be required later
             KeyPreview = true;
+
+            // check for updates thread
+            checkForUpdatesThread.RunWorkerAsync();
 
             // key thread checker
             keyStateThread.RunWorkerAsync();
@@ -657,6 +657,9 @@ namespace kangur
                 Thread.Sleep(1);
             }
         }
+        // check for new updates
+        private void checkForUpdatesThread_DoWork(object sender, DoWorkEventArgs e)
+        { Updates.CheckForUpdates(); }
 
         // show custom message box with warning or error icon
         public static void ShowError(string message) { MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }

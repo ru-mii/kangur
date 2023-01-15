@@ -39,6 +39,7 @@
             this.buttonModuleOpenSettingsEnvironment = new System.Windows.Forms.Button();
             this.buttonStateThread = new System.ComponentModel.BackgroundWorker();
             this.FormStyleBackChange = new System.ComponentModel.BackgroundWorker();
+            this.checkForUpdatesThread = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // labelProcessStatus
@@ -110,6 +111,10 @@
             // 
             this.buttonStateThread.DoWork += new System.ComponentModel.DoWorkEventHandler(this.buttonStateThread_DoWork);
             // 
+            // checkForUpdatesThread
+            // 
+            this.checkForUpdatesThread.DoWork += new System.ComponentModel.DoWorkEventHandler(this.checkForUpdatesThread_DoWork);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -144,6 +149,7 @@
         private System.Windows.Forms.Button buttonModuleOpenSettingsEnvironment;
         private System.ComponentModel.BackgroundWorker buttonStateThread;
         private System.ComponentModel.BackgroundWorker FormStyleBackChange;
+        private System.ComponentModel.BackgroundWorker checkForUpdatesThread;
     }
 }
 
