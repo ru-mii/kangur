@@ -63,13 +63,11 @@ namespace kangur
                     Properties.Settings.Default.hero_snapshotKeyCode = code;
                     Properties.Settings.Default.hero_snapshotKeyText = name;
                 }
-
                 else if (Hotkeys.clickedPadRow == 1)
                 {
                     Properties.Settings.Default.hero_loadKeyCode = code;
                     Properties.Settings.Default.hero_loadKeyText = name;
                 }
-
                 else if (Hotkeys.clickedPadRow == 2)
                 {
                     Properties.Settings.Default.hero_boostKeyCode = code;

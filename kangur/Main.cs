@@ -123,8 +123,7 @@ namespace kangur
                     }
                 }
 
-                //  alert for new session and assign
-                // new to last after operation
+                //  alert for new session and assign new to last after operation
                 if (lastProcessSession != processSession)
                 {
                     newSession = true;
@@ -145,8 +144,7 @@ namespace kangur
                         toolkit.WriteMemory(allocated, BitConverter.GetBytes(41f));
                         toolkit.WriteMemory(moduleAddress + 0xA165E, BitConverter.GetBytes(allocated));
                     }
-                    // new session but no process open
-                    // meaning game was open and you closed it
+                    // new session but no process open meaning game was open and you closed it
                     else
                     {
                         ChangeStatus("waiting for kao2", Color.Red);
@@ -502,7 +500,6 @@ namespace kangur
                             keybardTableReady[foreLoadTexturesExtracted] = true;
                             formModuleEnvironment.ImitateCheckboxClick("checkBoxForceLoadTextures");
                         }
-
                     }
                     else keybardTableReady[foreLoadTexturesExtracted] = false;
 
