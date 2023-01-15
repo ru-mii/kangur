@@ -57,7 +57,7 @@ namespace kangur
         public int[] gamepadTableReady = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
         // gamepad one time click forcers
-        public static bool[] keybardTableReady = new bool[1000];
+        public static bool[] keybardTableReady = new bool[1500];
 
         // initializing component, ignore
         public Main() { InitializeComponent(); }
@@ -627,7 +627,10 @@ namespace kangur
                     else { gamepadTable[10] = 0; gamepadTableReady[10] = 0; }
 
                     // 11
-                    if (gamepad.Dpad_Down_down) gamepadTable[11] = 1;
+                    if (gamepad.Dpad_Down_down)
+                    {
+                        gamepadTable[11] = 1;
+                    }
                     else { gamepadTable[11] = 0; gamepadTableReady[11] = 0; }
 
                     // 12
@@ -635,7 +638,10 @@ namespace kangur
                     else { gamepadTable[12] = 0; gamepadTableReady[12] = 0; }
 
                     // 13
-                    if (gamepad.Y_down) gamepadTable[13] = 1;
+                    if (gamepad.Y_down)
+                    {
+                        gamepadTable[13] = 1;
+                    }
                     else { gamepadTable[13] = 0; gamepadTableReady[13] = 0; }
 
                     // 14
