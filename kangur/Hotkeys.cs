@@ -126,7 +126,6 @@ namespace kangur
                 Properties.Settings.Default.hero_snapshotKeyText = "";
                 Properties.Settings.Default.hero_snapshotKeyCode = 0;
             }
-
             else if (selectedModule == "environment")
             {
                 Properties.Settings.Default.environment_loadLevelText = "";
@@ -146,7 +145,6 @@ namespace kangur
                 Properties.Settings.Default.hero_loadKeyText = "";
                 Properties.Settings.Default.hero_loadKeyCode = 0;
             }
-
             else if (selectedModule == "environment")
             {
                 Properties.Settings.Default.environment_forceLoadAllTexturesText = "";
@@ -166,7 +164,6 @@ namespace kangur
                 Properties.Settings.Default.hero_boostKeyText = "";
                 Properties.Settings.Default.hero_boostKeyCode = 0;
             }
-
             else if (selectedModule == "environment")
             {
                 Properties.Settings.Default.environment_loadLastCheckpointText = "";
