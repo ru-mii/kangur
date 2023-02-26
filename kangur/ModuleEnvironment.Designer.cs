@@ -38,7 +38,7 @@
             // 
             // comboBoxLevelSelect
             // 
-            this.comboBoxLevelSelect.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.comboBoxLevelSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxLevelSelect.FormattingEnabled = true;
             this.comboBoxLevelSelect.Items.AddRange(new object[] {
             "The Ship",

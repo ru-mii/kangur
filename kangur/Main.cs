@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace kangur
@@ -47,9 +43,6 @@ namespace kangur
         public static Process mainGameProcess = new Process();
         public static uint moduleAddress = 0;
 
-        // initiate main object for functions
-        Toolkit toolkit = new Toolkit();
-
         // holds all buttons, 0 = not pressed, 1 = pressed
         public int[] gamepadTable = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
@@ -59,8 +52,44 @@ namespace kangur
         // gamepad one time click forcers
         public static bool[] keybardTableReady = new bool[1500];
 
-        // initializing component, ignore
-        public Main() { InitializeComponent(); }
+        public static Main MainWindow { get; private set; }
+
+        public ActionsManager ActionsManager { get; private set; }
+        public PointersData PointersData { get; private set; }
+        public Hero Hero { get; private set; }
+
+        /// <summary>
+        /// Initializing component, ignore.
+        /// </summary>
+        public Main()
+        {
+            MainWindow = this;
+
+            InitializeComponent();
+            InitActions();
+        }
+
+        private void InitActions()
+        {
+            ActionsManager = new ActionsManager();
+
+            ActionsManager.RegisterAction(Properties.Settings.Default.hero_snapshotKeyCode, () =>
+            {
+                // load values to hero module form
+                var position = Hero.HeroPosition;
+                var rotation = Hero.HeroRotation;
+
+                formModuleHero.LoadPositionToForm(rotation.X, rotation.Y, position.X, position.Y, position.Z);
+
+                // reset action variable
+                module_hero_ACTION_snapshot = "";
+            });
+
+            ActionsManager.RegisterAction(Properties.Settings.Default.hero_loadKeyCode, () =>
+            {
+                Hero.SaveHeroTransformToMemory();
+            });
+        }
 
         // runs on form load
         private void Main_Load(object sender, EventArgs e)
@@ -140,9 +169,12 @@ namespace kangur
                         ChangeStatus("kao2 found, have fun", Color.Green);
 
                         // allocate memory
-                        uint allocated = toolkit.AllocateMemory();
-                        toolkit.WriteMemory(allocated, BitConverter.GetBytes(41f));
-                        toolkit.WriteMemory(moduleAddress + 0xA165E, BitConverter.GetBytes(allocated));
+                        uint allocated = Toolkit.AllocateMemory();
+                        Toolkit.WriteMemory(allocated, BitConverter.GetBytes(41f));
+                        Toolkit.WriteMemory(moduleAddress + 0xA165E, BitConverter.GetBytes(allocated));
+
+                        PointersData = new PointersData(Toolkit.ReadMemoryInt32(moduleAddress + 0x73D868));
+                        Hero = new Hero();
                     }
                     // new session but no process open meaning game was open and you closed it
                     else
@@ -161,7 +193,7 @@ namespace kangur
                     if (module_hero_ACTION_immortality != "")
                     {
                         // change memory section protection
-                        //toolkit.DisableMemoryProtection(moduleAddress + 0xF8B88, 3);
+                        //Toolkit.DisableMemoryProtection(moduleAddress + 0xF8B88, 3);
 
                         // old instruction moves your new damaged hp to the pointer
                         // new instruction doesn't move your hp subtracted by damage
@@ -169,8 +201,8 @@ namespace kangur
                         byte[] newInstr = { 0x90, 0x90, 0x90 }; // nop nop nop
 
                         // patch instructions
-                        if (module_hero_ACTION_immortality == "TRUE") toolkit.WriteMemory(moduleAddress + 0xF8B88, newInstr);
-                        else toolkit.WriteMemory(moduleAddress + 0xF8B88, oldInstr); // FALSE
+                        if (module_hero_ACTION_immortality == "TRUE") Toolkit.WriteMemory(moduleAddress + 0xF8B88, newInstr);
+                        else Toolkit.WriteMemory(moduleAddress + 0xF8B88, oldInstr); // FALSE
 
                         // reset action variable
                         module_hero_ACTION_immortality = "";
@@ -180,8 +212,8 @@ namespace kangur
                     else if (module_hero_ACTION_unlimitedBoomerangs != "")
                     {
                         // change memory section protection
-                        //toolkit.DisableMemoryProtection(moduleAddress + 0xF88AB, 4);
-                        //toolkit.DisableMemoryProtection(moduleAddress + 0xFAF38, 3);
+                        //Toolkit.DisableMemoryProtection(moduleAddress + 0xF88AB, 4);
+                        //Toolkit.DisableMemoryProtection(moduleAddress + 0xFAF38, 3);
 
                         // old instruction checks if you don't have enough boomerangs to throw
                         // new instructions changes compared number to -70 so the flag never occurs
@@ -196,94 +228,30 @@ namespace kangur
                         // patch instructions
                         if (module_hero_ACTION_unlimitedBoomerangs == "TRUE")
                         {
-                            toolkit.WriteMemory(moduleAddress + 0xF88AB, newInstr1);
-                            toolkit.WriteMemory(moduleAddress + 0xFAF38, newInstr2);
+                            Toolkit.WriteMemory(moduleAddress + 0xF88AB, newInstr1);
+                            Toolkit.WriteMemory(moduleAddress + 0xFAF38, newInstr2);
                         }
                         else // FALSE
                         {
-                            toolkit.WriteMemory(moduleAddress + 0xF88AB, oldInstr1);
-                            toolkit.WriteMemory(moduleAddress + 0xFAF38, oldInstr2);
+                            Toolkit.WriteMemory(moduleAddress + 0xF88AB, oldInstr1);
+                            Toolkit.WriteMemory(moduleAddress + 0xFAF38, oldInstr2);
                         }
 
                         // reset action variable
                         module_hero_ACTION_unlimitedBoomerangs = "";
                     }
-
-                    // take position snapshot
-                    else if (module_hero_ACTION_snapshot != "")
-                    {
-                        // get required pointer
-                        uint gameletPointer = toolkit.ReadMemoryInt32(moduleAddress + 0x73D868);
-                        uint heroPointer = toolkit.ReadMemoryInt32(gameletPointer + 0x38C);
-
-                        // read position address
-                        float rotX = toolkit.ReadMemoryFloat(heroPointer + 0x50);
-                        float rotY = toolkit.ReadMemoryFloat(heroPointer + 0x54);
-                        float posX = toolkit.ReadMemoryFloat(heroPointer + 0x58);
-                        float posY = toolkit.ReadMemoryFloat(heroPointer + 0x5C);
-                        float posZ = toolkit.ReadMemoryFloat(heroPointer + 0x60);
-
-                        // load values to hero module form
-                        formModuleHero.loadPositionToForm(rotX, rotY, posX, posY, posZ);
-
-                        // reset action variable
-                        module_hero_ACTION_snapshot = "";
-                    }
-
-                    // load new position
-                    else if (module_hero_ACTION_load != "")
-                    {
-                        // get required pointer
-                        uint gameletPointer = toolkit.ReadMemoryInt32(moduleAddress + 0x73D868);
-                        uint positionPointer = toolkit.ReadMemoryInt32(gameletPointer + 0x38C) + 0x50;
-
-                        // get positions from form
-                        string[] rawStringValues = formModuleHero.getPositionFromForm();
-
-                        // go through each text and replace coma for culture
-                        for (int i = 0; i < rawStringValues.Length; i++)
-                            rawStringValues[i] = rawStringValues[i].Replace(',', '.');
-
-                        // try parse each value first and throw error if there's one
-                        bool parseFailed = false;
-                        foreach (string raw in rawStringValues)
-                            if (!float.TryParse(raw, NumberStyles.Any, CultureInfo.InvariantCulture, out float zero))
-                                parseFailed = true;
-
-                        // make sure position values are correct
-                        if (!parseFailed)
-                        {
-                            // convert to byte array for faster writings and single execution style
-                            byte[] rotX = BitConverter.GetBytes(float.Parse(rawStringValues[0], CultureInfo.InvariantCulture.NumberFormat));
-                            byte[] rotY = BitConverter.GetBytes(float.Parse(rawStringValues[1], CultureInfo.InvariantCulture.NumberFormat));
-                            byte[] posX = BitConverter.GetBytes(float.Parse(rawStringValues[2], CultureInfo.InvariantCulture.NumberFormat));
-                            byte[] posY = BitConverter.GetBytes(float.Parse(rawStringValues[3], CultureInfo.InvariantCulture.NumberFormat));
-                            byte[] posZ = BitConverter.GetBytes(float.Parse(rawStringValues[4], CultureInfo.InvariantCulture.NumberFormat));
-
-                            // merge byte arrays
-                            byte[] fullByteTable = toolkit.MergeByteArrays(rotX, rotY, posX, posY, posZ);
-
-                            // write full vector5 position as byte arary
-                            toolkit.WriteMemory(positionPointer, fullByteTable);
-                        }
-                        else ShowError("one of the position values is not in correct format");
-
-                        // reset action variable
-                        module_hero_ACTION_load = "";
-                    }
-
                     // boosts vertical position by a number
                     else if (module_hero_ACTION_boost != "")
                     {
                         // get required pointer
-                        uint gameletPointer = toolkit.ReadMemoryInt32(moduleAddress + 0x73D868);
-                        uint positionPointer = toolkit.ReadMemoryInt32(gameletPointer + 0x38C) + 0x50;
+                        uint gameletPointer = Toolkit.ReadMemoryInt32(moduleAddress + 0x73D868);
+                        uint positionPointer = Toolkit.ReadMemoryInt32(gameletPointer + 0x38C) + 0x50;
 
                         // read current height and increase by chosen number
-                        float newHeroHeight = toolkit.ReadMemoryFloat(positionPointer + 0x10) + formModuleHero.getNumericBoost();
+                        float newHeroHeight = Toolkit.ReadMemoryFloat(positionPointer + 0x10) + formModuleHero.GetNumericBoost();
 
                         // write new height position into memory
-                        toolkit.WriteMemory(positionPointer + 0x10, BitConverter.GetBytes(newHeroHeight));
+                        Toolkit.WriteMemory(positionPointer + 0x10, BitConverter.GetBytes(newHeroHeight));
 
                         // reset action variable
                         module_hero_ACTION_boost = "";
@@ -293,10 +261,10 @@ namespace kangur
                     else if (module_hero_ACTION_stars != "")
                     {
                         // read stars from numeric
-                        int newStars = formModuleHero.getNumericStars();
+                        int newStars = formModuleHero.GetNumericStars();
 
                         // write new stars into memory
-                        toolkit.WriteMemory(moduleAddress + 0x734DD0, BitConverter.GetBytes(newStars));
+                        Toolkit.WriteMemory(moduleAddress + 0x734DD0, BitConverter.GetBytes(newStars));
 
                         // reset action variable
                         module_hero_ACTION_stars = "";
@@ -309,18 +277,18 @@ namespace kangur
                     else if (module_environment_ACTION_loadLevel != 0)
                     {
                         // get required pointer
-                        uint levelLoadAddress = toolkit.ReadMemoryInt32(moduleAddress + 0x73D868) + 0x3754;
+                        uint levelLoadAddress = Toolkit.ReadMemoryInt32(moduleAddress + 0x73D868) + 0x3754;
 
                         // make sure we got correct level address right
                         if (levelLoadAddress != 0)
                         {
                             // gets currently loading level
-                            uint currentlyLoading = toolkit.ReadMemoryInt32(levelLoadAddress);
+                            uint currentlyLoading = Toolkit.ReadMemoryInt32(levelLoadAddress);
 
                             // make sure level is not loading at the moment
                             if (currentlyLoading == 0)
                             {
-                                toolkit.WriteMemory(levelLoadAddress,
+                                Toolkit.WriteMemory(levelLoadAddress,
                                 BitConverter.GetBytes(module_environment_ACTION_loadLevel));
                             }
                         }
@@ -333,7 +301,7 @@ namespace kangur
                     else if (module_environment_ACTION_unlock_all_levels != "")
                     {
                         // write bool true to one of the debug options
-                        toolkit.WriteMemory(moduleAddress + 0x734DE9, BitConverter.GetBytes(1));
+                        Toolkit.WriteMemory(moduleAddress + 0x734DE9, BitConverter.GetBytes(1));
 
                         // reset action variable
                         module_environment_ACTION_unlock_all_levels = "";
@@ -348,10 +316,10 @@ namespace kangur
 
                         // enable
                         if (module_environment_ACTION_force_load_textures == "TRUE")
-                            toolkit.WriteMemory(moduleAddress + 0x1B40C6, enable);
+                            Toolkit.WriteMemory(moduleAddress + 0x1B40C6, enable);
 
                         // disable
-                        else toolkit.WriteMemory(moduleAddress + 0x1B40C6, disable);
+                        else Toolkit.WriteMemory(moduleAddress + 0x1B40C6, disable);
 
                         // reset action variable
                         module_environment_ACTION_force_load_textures = "";
@@ -361,10 +329,10 @@ namespace kangur
                     else if (module_environment_ACTION_load_last_checkpoint == "TRUE")
                     {
                         // get checkpoint loader address
-                        uint checkpoint = toolkit.ReadMemoryInt32(moduleAddress + 0x73D868) + 0x3F0;
+                        uint checkpoint = Toolkit.ReadMemoryInt32(moduleAddress + 0x73D868) + 0x3F0;
 
                         // write reload value = 2
-                        toolkit.WriteMemory(checkpoint, BitConverter.GetBytes(2));
+                        Toolkit.WriteMemory(checkpoint, BitConverter.GetBytes(2));
 
                         // reset action variable
                         module_environment_ACTION_load_last_checkpoint = "";
@@ -418,7 +386,7 @@ namespace kangur
                     // check if form module has been disposed
                     if (!formModuleHero.IsDisposed)
                     {
-                        if (!toolkit.IsFormOpen(moduleForm)) formModuleHero.Show();
+                        if (!Toolkit.IsFormOpen(moduleForm)) formModuleHero.Show();
                         else if (!formModuleHero.Visible) formModuleHero.Show();
                     }
                     else
@@ -433,7 +401,7 @@ namespace kangur
                     // check if form module has been disposed
                     if (!formModuleEnvironment.IsDisposed)
                     {
-                        if (!toolkit.IsFormOpen(moduleForm)) formModuleEnvironment.Show();
+                        if (!Toolkit.IsFormOpen(moduleForm)) formModuleEnvironment.Show();
                         else if (!formModuleEnvironment.Visible) formModuleEnvironment.Show();
                     }
                     else
@@ -444,13 +412,13 @@ namespace kangur
                     }
                 }
             }
-            else ShowError("kao2 needs to be open");
+            else Toolkit.ShowError("kao2 needs to be open");
         }
 
         // open hotkeys form
         private void buttonHotkeys_Click(object sender, EventArgs e)
         {
-            if (!toolkit.IsFormOpen("Hotkeys")) formHotkeys.Show();
+            if (!Toolkit.IsFormOpen("Hotkeys")) formHotkeys.Show();
             else if (!formHotkeys.Visible) formHotkeys.Show();
         }
 
@@ -470,30 +438,30 @@ namespace kangur
             // infinite loop
             while (true)
             {
+                if (Toolkit.IsKeyPressed(Properties.Settings.Default.hero_snapshotKeyCode))
+                    ActionsManager.CallAction(Properties.Settings.Default.hero_snapshotKeyCode);
+
+                // load position snapshot with hotkey
+                if (Toolkit.IsKeyPressed(Properties.Settings.Default.hero_loadKeyCode))
+                    ActionsManager.CallAction(Properties.Settings.Default.hero_loadKeyCode);
+
                 // check keyboard press
-                if (toolkit.IsFormVisible("ModuleHero"))
+                if (Toolkit.IsFormVisible("ModuleHero"))
                 {
-                    if (toolkit.IsKeyPressed(Properties.Settings.Default.hero_snapshotKeyCode))
-                        formModuleHero.ImitateButtonClick("buttonSnapshot");
-
-                    // load position snapshot with hotkey
-                    else if (toolkit.IsKeyPressed(Properties.Settings.Default.hero_loadKeyCode))
-                        formModuleHero.ImitateButtonClick("buttonLoad");
-
                     // boost height position
-                    else if (toolkit.IsKeyPressed(Properties.Settings.Default.hero_boostKeyCode))
+                    if (Toolkit.IsKeyPressed(Properties.Settings.Default.hero_boostKeyCode))
                         formModuleHero.ImitateButtonClick("buttonBoost");
                 }
 
-                if (toolkit.IsFormVisible("ModuleEnvironment"))
+                if (Toolkit.IsFormVisible("ModuleEnvironment"))
                 {
                     // load level
-                    if (toolkit.IsKeyPressed(Properties.Settings.Default.environment_loadLevelKeyCode))
+                    if (Toolkit.IsKeyPressed(Properties.Settings.Default.environment_loadLevelKeyCode))
                         formModuleEnvironment.ImitateButtonClick("buttonLoadLevel");
 
                     // extract key and compare with ready table
                     int foreLoadTexturesExtracted = Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode;
-                    if (toolkit.IsKeyPressed(foreLoadTexturesExtracted))
+                    if (Toolkit.IsKeyPressed(foreLoadTexturesExtracted))
                     {
                         if (!keybardTableReady[foreLoadTexturesExtracted])
                         {
@@ -504,7 +472,7 @@ namespace kangur
                     else keybardTableReady[foreLoadTexturesExtracted] = false;
 
                     // load last checkpoint
-                    if (toolkit.IsKeyPressed(Properties.Settings.Default.environment_loadLastCheckpointKeyCode))
+                    if (Toolkit.IsKeyPressed(Properties.Settings.Default.environment_loadLastCheckpointKeyCode))
                     {
                         formModuleEnvironment.ImitateButtonClick("buttonLoadLastCheckpoint");
                     }
@@ -513,7 +481,7 @@ namespace kangur
                 // check gamepad press
                 if (gamepadTable.Sum() > 0)
                 {
-                    if (toolkit.IsFormVisible("ModuleHero"))
+                    if (Toolkit.IsFormVisible("ModuleHero"))
                     {
                         if (Properties.Settings.Default.hero_snapshotKeyCode >= 1000 &&
                             gamepadTable[Properties.Settings.Default.hero_snapshotKeyCode - 1000] > 0)
@@ -531,7 +499,7 @@ namespace kangur
                     }
 
                     // take position snapshot with hotkey
-                    if (toolkit.IsFormVisible("ModuleEnvironment"))
+                    if (Toolkit.IsFormVisible("ModuleEnvironment"))
                     {
                         // load level
                         if (Properties.Settings.Default.environment_loadLevelKeyCode >= 1000 &&
@@ -661,9 +629,5 @@ namespace kangur
         // check for new updates
         private void checkForUpdatesThread_DoWork(object sender, DoWorkEventArgs e)
         { Updates.CheckForUpdates(); }
-
-        // show custom message box with warning or error icon
-        public static void ShowError(string message) { MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-        public static void ShowInfo(string message) { MessageBox.Show(message, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information); }
     }
 }

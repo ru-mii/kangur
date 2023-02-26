@@ -1,19 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace kangur
 {
-    // cool and useful functions
-    class Toolkit
+    /// <summary>
+    /// Cool and useful functions.
+    /// </summary>
+    public static class Toolkit
     {
-        // check if window = form is already open
-        public bool IsFormOpen(string name)
+        /// <summary>
+        /// Check if window = form is already open
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static bool IsFormOpen(string name)
         {
             // go through all of the forms
             foreach (Form window in Application.OpenForms)
@@ -27,8 +29,12 @@ namespace kangur
             return false;
         }
 
-        // check if form is visible
-        public bool IsFormVisible(string name)
+        /// <summary>
+        /// Check if form is visible
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static bool IsFormVisible(string name)
         {
             // go through all of the forms
             foreach (Form window in Application.OpenForms)
@@ -43,19 +49,29 @@ namespace kangur
             return false;
         }
 
-        // change memory protection
-        public bool DisableMemoryProtection(uint address, int size)
+        /// <summary>
+        /// Change memory protection.
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="size"></param>
+        /// <returns></returns>
+        public static bool DisableMemoryProtection(uint address, int size)
         { return VirtualProtectEx(Main.mainGameProcess.Handle, (IntPtr)address, size, 0x40, out IntPtr zero); }
 
-        // write memory easily, a cool wrapper
-        public bool WriteMemory(uint address, byte[] array)
+        /// <summary>
+        /// Write memory easily, a cool wrapper.
+        /// </summary>
+        /// <param name="address"></param>
+        /// <param name="array"></param>
+        /// <returns></returns>
+        public static bool WriteMemory(uint address, byte[] array)
         {
             // longer function in wrapper
             return WriteProcessMemory(Main.mainGameProcess.Handle, (IntPtr)address,
                 array, array.Length, out IntPtr nullification);
         }
 
-        public uint ReadMemoryInt32(uint address)
+        public static uint ReadMemoryInt32(uint address)
         {
             // 4 because int is 4
             byte[] rawBytes = new byte[4];
@@ -68,8 +84,12 @@ namespace kangur
             return BitConverter.ToUInt32(rawBytes, 0);
         }
 
-        // reads float value from memory
-        public float ReadMemoryFloat(uint address)
+        /// <summary>
+        /// Reads float value from memory.
+        /// </summary>
+        /// <param name="address"></param>
+        /// <returns></returns>
+        public static float ReadMemoryFloat(uint address)
         {
             // 4 because float is 4
             byte[] rawBytes = new byte[4];
@@ -82,23 +102,29 @@ namespace kangur
             return BitConverter.ToSingle(rawBytes, 0);
         }
 
-        // allocates memory
-        public uint AllocateMemory()
+        /// <summary>
+        /// Allocates memory.
+        /// </summary>
+        /// <returns></returns>
+        public static uint AllocateMemory()
         { return (uint)VirtualAllocEx(Main.mainGameProcess.Handle, IntPtr.Zero, 0x1000, 0x1000 | 0x2000, 0x40); }
 
         // checks if key is pressed
-        public bool IsKeyPressed(int keyCode)
+        public static bool IsKeyPressed(int keyCode)
         {
             // read key status from table and compare
             short keyStatus = GetAsyncKeyState(keyCode);
 
             // return if pressed
-            if ((keyStatus & 1) != 0) return true;
-            else return false;
+            return (keyStatus & 1) != 0;
         }
 
-        // merging byte arrays with concat
-        public byte[] MergeByteArrays(params byte[][] arrays)
+        /// <summary>
+        /// Merging byte arrays with concat.
+        /// </summary>
+        /// <param name="arrays"></param>
+        /// <returns></returns>
+        public static byte[] MergeByteArrays(params byte[][] arrays)
         {
             // create empty array
             byte[] byteArray = new byte[0];
@@ -110,6 +136,10 @@ namespace kangur
             // returned merged arrays
             return byteArray;
         }
+
+        // show custom message box with warning or error icon
+        public static void ShowError(string message) { MessageBox.Show(message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        public static void ShowInfo(string message) { MessageBox.Show(message, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information); }
 
         // imported protection change
         [DllImport("kernel32.dll", SetLastError = true)]

@@ -78,6 +78,8 @@
             this.textBoxRotX.Size = new System.Drawing.Size(84, 20);
             this.textBoxRotX.TabIndex = 6;
             this.textBoxRotX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxRotX.TextChanged += new System.EventHandler(this.TransformTextBox_TextChanged);
+            this.textBoxRotX.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TransformTextBox_KeyPress);
             // 
             // label2
             // 
@@ -104,6 +106,8 @@
             this.textBoxRotY.Size = new System.Drawing.Size(84, 20);
             this.textBoxRotY.TabIndex = 8;
             this.textBoxRotY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxRotY.TextChanged += new System.EventHandler(this.TransformTextBox_TextChanged);
+            this.textBoxRotY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TransformTextBox_KeyPress);
             // 
             // label4
             // 
@@ -121,6 +125,8 @@
             this.textBoxPosX.Size = new System.Drawing.Size(84, 20);
             this.textBoxPosX.TabIndex = 10;
             this.textBoxPosX.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxPosX.TextChanged += new System.EventHandler(this.TransformTextBox_TextChanged);
+            this.textBoxPosX.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TransformTextBox_KeyPress);
             // 
             // label5
             // 
@@ -138,6 +144,8 @@
             this.textBoxPosY.Size = new System.Drawing.Size(84, 20);
             this.textBoxPosY.TabIndex = 12;
             this.textBoxPosY.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxPosY.TextChanged += new System.EventHandler(this.TransformTextBox_TextChanged);
+            this.textBoxPosY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TransformTextBox_KeyPress);
             // 
             // label6
             // 
@@ -155,6 +163,8 @@
             this.textBoxPosZ.Size = new System.Drawing.Size(84, 20);
             this.textBoxPosZ.TabIndex = 14;
             this.textBoxPosZ.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBoxPosZ.TextChanged += new System.EventHandler(this.TransformTextBox_TextChanged);
+            this.textBoxPosZ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TransformTextBox_KeyPress);
             // 
             // buttonSnapshot
             // 

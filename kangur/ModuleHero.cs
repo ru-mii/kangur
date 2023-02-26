@@ -1,20 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Numerics;
 using System.Windows.Forms;
-using kangur.Properties;
 
 namespace kangur
 {
     public partial class ModuleHero : Form
     {
+        private TextBox[] _transformTextBoxes;
+
         // initializing component, ignore
-        public ModuleHero() { InitializeComponent(); }
+        public ModuleHero()
+        {
+            InitializeComponent();
+
+            _transformTextBoxes = new TextBox[]
+            {
+                textBoxRotX,
+                textBoxRotY,
+                textBoxPosX,
+                textBoxPosY,
+                textBoxPosZ
+            };
+        }
 
         // runs on form load
         private void ModuleHero_Load(object sender, EventArgs e)
@@ -37,11 +44,15 @@ namespace kangur
         private void checkBoxUnlimitedBoomerangs_CheckedChanged(object sender, EventArgs e)
         { Main.module_hero_ACTION_unlimitedBoomerangs = checkBoxUnlimitedBoomerangs.Checked.ToString().ToUpper(); }
 
-        private void buttonSnapshot_Click(object sender, EventArgs e)
-        { Main.module_hero_ACTION_snapshot = "TRUE"; }
+        private void buttonSnapshot_Click(object sender, EventArgs e) => Main.MainWindow.Hero.SaveHeroTransformToMemory();
 
         private void buttonLoad_Click(object sender, EventArgs e)
-        { Main.module_hero_ACTION_load = "TRUE"; }
+        {
+            var playerPos = Main.MainWindow.Hero.HeroPosition;
+            var playerRot = Main.MainWindow.Hero.HeroRotation;
+
+            LoadPositionToForm(playerRot.X, playerRot.Y, playerPos.X, playerPos.Y, playerPos.Z);
+        }
 
         private void buttonBoost_Click(object sender, EventArgs e)
         { Main.module_hero_ACTION_boost = "TRUE"; }
@@ -50,7 +61,7 @@ namespace kangur
         { Main.module_hero_ACTION_stars = "TRUE"; }
 
         // loads position to form between form classes
-        public void loadPositionToForm(float rotX, float rotY, float posX, float posY, float posZ)
+        public void LoadPositionToForm(float rotX, float rotY, float posX, float posY, float posZ)
         {
             textBoxRotX.Text = rotX.ToString();
             textBoxRotY.Text = rotY.ToString();
@@ -60,7 +71,7 @@ namespace kangur
         }
 
         // gets position from form between form classes
-        public string[] getPositionFromForm ()
+        public string[] GetPositionFromForm ()
         {
             string[] vectors = new string[5];
 
@@ -74,11 +85,11 @@ namespace kangur
         }
 
         // get numeric boost value
-        public int getNumericBoost ()
+        public int GetNumericBoost ()
         {  return (int)numericBoost.Value; }
 
         // get numeric stars value
-        public int getNumericStars()
+        public int GetNumericStars()
         { return (int)numericStars.Value; }
 
         // imitates button click, function for usage from another forms
@@ -110,6 +121,52 @@ namespace kangur
                     CheckBox tempCheckbox = control as CheckBox;
                     tempCheckbox.Checked = !tempCheckbox.Checked;
                 }
+            }
+        }
+
+        private bool TryParseTextBoxes()
+        {
+            foreach (TextBox textBox in _transformTextBoxes)
+            {
+                if(string.IsNullOrEmpty(textBox.Text)) return false;
+
+                try
+                {
+                    float.TryParse(textBox.Text, out _);
+                }
+                catch (Exception e)
+                { 
+                    Toolkit.ShowError(e.ToString());
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private void TransformTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (!TryParseTextBoxes()) return;
+
+            var heroPos = new Vector3(float.Parse(textBoxPosX.Text), float.Parse(textBoxPosY.Text), float.Parse(textBoxPosZ.Text));
+            var heroRot = new Vector2(float.Parse(textBoxRotX.Text), float.Parse(textBoxRotY.Text));
+
+            Main.MainWindow.Hero.HeroPosition = heroPos;
+            Main.MainWindow.Hero.HeroRotation = heroRot;
+
+            Main.MainWindow.Hero.SaveHeroTransformToMemory();
+        }
+
+        private void TransformTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
             }
         }
     }
