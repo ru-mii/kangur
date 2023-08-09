@@ -46,6 +46,7 @@
             this.pad0 = new System.Windows.Forms.Button();
             this.pad1 = new System.Windows.Forms.Button();
             this.pad2 = new System.Windows.Forms.Button();
+            this.buttonSelectSpeed = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // liner_pooura
@@ -117,7 +118,7 @@
             // label1
             // 
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(12, 81);
+            this.label1.Location = new System.Drawing.Point(13, 105);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(102, 87);
             this.label1.TabIndex = 34;
@@ -177,9 +178,9 @@
             // buttonSelectEnvironment
             // 
             this.buttonSelectEnvironment.BackColor = System.Drawing.SystemColors.Control;
-            this.buttonSelectEnvironment.Location = new System.Drawing.Point(15, 45);
+            this.buttonSelectEnvironment.Location = new System.Drawing.Point(12, 42);
             this.buttonSelectEnvironment.Name = "buttonSelectEnvironment";
-            this.buttonSelectEnvironment.Size = new System.Drawing.Size(99, 23);
+            this.buttonSelectEnvironment.Size = new System.Drawing.Size(102, 23);
             this.buttonSelectEnvironment.TabIndex = 41;
             this.buttonSelectEnvironment.Text = "environment";
             this.buttonSelectEnvironment.UseVisualStyleBackColor = true;
@@ -218,11 +219,22 @@
             this.pad2.UseVisualStyleBackColor = true;
             this.pad2.Click += new System.EventHandler(this.pad_Click);
             // 
+            // buttonSelectSpeed
+            // 
+            this.buttonSelectSpeed.BackColor = System.Drawing.SystemColors.Control;
+            this.buttonSelectSpeed.Location = new System.Drawing.Point(12, 72);
+            this.buttonSelectSpeed.Name = "buttonSelectSpeed";
+            this.buttonSelectSpeed.Size = new System.Drawing.Size(102, 23);
+            this.buttonSelectSpeed.TabIndex = 45;
+            this.buttonSelectSpeed.Text = "speed";
+            this.buttonSelectSpeed.UseVisualStyleBackColor = true;
+            // 
             // Hotkeys
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(528, 182);
+            this.ClientSize = new System.Drawing.Size(528, 200);
+            this.Controls.Add(this.buttonSelectSpeed);
             this.Controls.Add(this.pad2);
             this.Controls.Add(this.pad1);
             this.Controls.Add(this.pad0);
@@ -271,5 +283,6 @@
         private System.Windows.Forms.Button pad0;
         private System.Windows.Forms.Button pad1;
         private System.Windows.Forms.Button pad2;
+        private System.Windows.Forms.Button buttonSelectSpeed;
     }
 }

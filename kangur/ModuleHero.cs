@@ -32,22 +32,22 @@ namespace kangur
 
         // assigning flags to specific functions
         private void checkBoxImmortality_CheckedChanged(object sender, EventArgs e)
-        { Main.module_hero_ACTION_immortality = checkBoxImmortality.Checked.ToString().ToUpper(); }
+        { Main.module_hero_immortality = checkBoxImmortality.Checked.ToString().ToUpper(); }
 
         private void checkBoxUnlimitedBoomerangs_CheckedChanged(object sender, EventArgs e)
-        { Main.module_hero_ACTION_unlimitedBoomerangs = checkBoxUnlimitedBoomerangs.Checked.ToString().ToUpper(); }
+        { Main.module_hero_unlimitedBoomerangs = checkBoxUnlimitedBoomerangs.Checked.ToString().ToUpper(); }
 
         private void buttonSnapshot_Click(object sender, EventArgs e)
-        { Main.module_hero_ACTION_snapshot = "TRUE"; }
+        { Main.module_hero_snapshot = "TRUE"; }
 
         private void buttonLoad_Click(object sender, EventArgs e)
-        { Main.module_hero_ACTION_load = "TRUE"; }
+        { Main.module_hero_load = "TRUE"; }
 
         private void buttonBoost_Click(object sender, EventArgs e)
-        { Main.module_hero_ACTION_boost = "TRUE"; }
+        { Main.module_hero_boost = "TRUE"; }
 
         private void buttonStars_Click(object sender, EventArgs e)
-        { Main.module_hero_ACTION_stars = "TRUE"; }
+        { Main.module_hero_stars = "TRUE"; }
 
         // loads position to form between form classes
         public void loadPositionToForm(float rotX, float rotY, float posX, float posY, float posZ)

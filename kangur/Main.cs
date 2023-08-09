@@ -17,7 +17,7 @@ namespace kangur
     {
         // build version, adding new line because github adds it to their file
         // and the version is being compared with one written in github file in repo
-        public static string softwareVersion = "7" + "\n";
+        public static string softwareVersion = "8" + "\n";
 
         // start time of a process, helps detecting
         // if the game reopened and we need to patch again
@@ -26,21 +26,23 @@ namespace kangur
 
         // all module static related variables
         // will start with "module" and its name
-        public static string module_hero_ACTION_immortality = "";
-        public static string module_hero_ACTION_unlimitedBoomerangs = "";
-        public static string module_hero_ACTION_snapshot = "";
-        public static string module_hero_ACTION_load = "";
-        public static string module_hero_ACTION_boost = "";
-        public static string module_hero_ACTION_stars = "";
+        public static string module_hero_immortality = "";
+        public static string module_hero_unlimitedBoomerangs = "";
+        public static string module_hero_snapshot = "";
+        public static string module_hero_load = "";
+        public static string module_hero_boost = "";
+        public static string module_hero_stars = "";
 
-        public static int module_environment_ACTION_loadLevel = 0;
-        public static string module_environment_ACTION_unlock_all_levels = "";
-        public static string module_environment_ACTION_force_load_textures = "";
-        public static string module_environment_ACTION_load_last_checkpoint = "";
+        public static int module_environment_loadLevel = 0;
+        public static string module_environment_unlock_all_levels = "";
+        public static string module_environment_force_load_textures = "";
+        public static string module_environment_load_last_checkpoint = "";
+        public static string module_environment_disable_checkpoint_hitbox = "";
 
         // allocating forms
         ModuleHero formModuleHero = new ModuleHero();
         ModuleEnvironment formModuleEnvironment = new ModuleEnvironment();
+        ModuleSpeed formModuleSpeed = new ModuleSpeed();
         Hotkeys formHotkeys = new Hotkeys();
 
         // global game process
@@ -67,7 +69,7 @@ namespace kangur
         {
             // show version in the window title on the top
             // by using global variable that's used for update cheks
-            Text = "kangur v" + softwareVersion;
+            Text = "kangur v" + softwareVersion.Trim();
 
             // disable north korean thread control, who cares
             CheckForIllegalCrossThreadCalls = false;
@@ -158,7 +160,7 @@ namespace kangur
                     #region MODULE_HERO
 
                     // makes you immortal to mobs
-                    if (module_hero_ACTION_immortality != "")
+                    if (module_hero_immortality != "")
                     {
                         // change memory section protection
                         //toolkit.DisableMemoryProtection(moduleAddress + 0xF8B88, 3);
@@ -169,15 +171,15 @@ namespace kangur
                         byte[] newInstr = { 0x90, 0x90, 0x90 }; // nop nop nop
 
                         // patch instructions
-                        if (module_hero_ACTION_immortality == "TRUE") toolkit.WriteMemory(moduleAddress + 0xF8B88, newInstr);
+                        if (module_hero_immortality == "TRUE") toolkit.WriteMemory(moduleAddress + 0xF8B88, newInstr);
                         else toolkit.WriteMemory(moduleAddress + 0xF8B88, oldInstr); // FALSE
 
                         // reset action variable
-                        module_hero_ACTION_immortality = "";
+                        module_hero_immortality = "";
                     }
 
                     // you can use boomerangs limitlessly
-                    else if (module_hero_ACTION_unlimitedBoomerangs != "")
+                    else if (module_hero_unlimitedBoomerangs != "")
                     {
                         // change memory section protection
                         //toolkit.DisableMemoryProtection(moduleAddress + 0xF88AB, 4);
@@ -194,7 +196,7 @@ namespace kangur
                         byte[] newInstr2 = { 0x90, 0x90, 0x90 }; // nop nop nop
 
                         // patch instructions
-                        if (module_hero_ACTION_unlimitedBoomerangs == "TRUE")
+                        if (module_hero_unlimitedBoomerangs == "TRUE")
                         {
                             toolkit.WriteMemory(moduleAddress + 0xF88AB, newInstr1);
                             toolkit.WriteMemory(moduleAddress + 0xFAF38, newInstr2);
@@ -206,11 +208,11 @@ namespace kangur
                         }
 
                         // reset action variable
-                        module_hero_ACTION_unlimitedBoomerangs = "";
+                        module_hero_unlimitedBoomerangs = "";
                     }
 
                     // take position snapshot
-                    else if (module_hero_ACTION_snapshot != "")
+                    else if (module_hero_snapshot != "")
                     {
                         // get required pointer
                         uint gameletPointer = toolkit.ReadMemoryInt32(moduleAddress + 0x73D868);
@@ -227,11 +229,11 @@ namespace kangur
                         formModuleHero.loadPositionToForm(rotX, rotY, posX, posY, posZ);
 
                         // reset action variable
-                        module_hero_ACTION_snapshot = "";
+                        module_hero_snapshot = "";
                     }
 
                     // load new position
-                    else if (module_hero_ACTION_load != "")
+                    else if (module_hero_load != "")
                     {
                         // get required pointer
                         uint gameletPointer = toolkit.ReadMemoryInt32(moduleAddress + 0x73D868);
@@ -269,11 +271,11 @@ namespace kangur
                         else ShowError("one of the position values is not in correct format");
 
                         // reset action variable
-                        module_hero_ACTION_load = "";
+                        module_hero_load = "";
                     }
 
                     // boosts vertical position by a number
-                    else if (module_hero_ACTION_boost != "")
+                    else if (module_hero_boost != "")
                     {
                         // get required pointer
                         uint gameletPointer = toolkit.ReadMemoryInt32(moduleAddress + 0x73D868);
@@ -286,11 +288,11 @@ namespace kangur
                         toolkit.WriteMemory(positionPointer + 0x10, BitConverter.GetBytes(newHeroHeight));
 
                         // reset action variable
-                        module_hero_ACTION_boost = "";
+                        module_hero_boost = "";
                     }
 
                     // change player stars
-                    else if (module_hero_ACTION_stars != "")
+                    else if (module_hero_stars != "")
                     {
                         // read stars from numeric
                         int newStars = formModuleHero.getNumericStars();
@@ -299,14 +301,14 @@ namespace kangur
                         toolkit.WriteMemory(moduleAddress + 0x734DD0, BitConverter.GetBytes(newStars));
 
                         // reset action variable
-                        module_hero_ACTION_stars = "";
+                        module_hero_stars = "";
                     }
 
                     #endregion // ends region
                     #region MODULE_ENVIRONMENT
 
                     // loads selected level
-                    else if (module_environment_ACTION_loadLevel != 0)
+                    else if (module_environment_loadLevel != 0)
                     {
                         // get required pointer
                         uint levelLoadAddress = toolkit.ReadMemoryInt32(moduleAddress + 0x73D868) + 0x3754;
@@ -321,44 +323,44 @@ namespace kangur
                             if (currentlyLoading == 0)
                             {
                                 toolkit.WriteMemory(levelLoadAddress,
-                                BitConverter.GetBytes(module_environment_ACTION_loadLevel));
+                                BitConverter.GetBytes(module_environment_loadLevel));
                             }
                         }
 
                         // reset action variable
-                        module_environment_ACTION_loadLevel = 0;
+                        module_environment_loadLevel = 0;
                     }
 
                     // unlocks all levels on the list
-                    else if (module_environment_ACTION_unlock_all_levels != "")
+                    else if (module_environment_unlock_all_levels != "")
                     {
                         // write bool true to one of the debug options
                         toolkit.WriteMemory(moduleAddress + 0x734DE9, BitConverter.GetBytes(1));
 
                         // reset action variable
-                        module_environment_ACTION_unlock_all_levels = "";
+                        module_environment_unlock_all_levels = "";
                     }
 
                     // force loads all textures
-                    else if (module_environment_ACTION_force_load_textures != "")
+                    else if (module_environment_force_load_textures != "")
                     {
                         // instructions
                         byte[] enable = { 0xEB }; // jmp [address]
                         byte[] disable = { 0x75 }; // jne [address]
 
                         // enable
-                        if (module_environment_ACTION_force_load_textures == "TRUE")
+                        if (module_environment_force_load_textures == "TRUE")
                             toolkit.WriteMemory(moduleAddress + 0x1B40C6, enable);
 
                         // disable
                         else toolkit.WriteMemory(moduleAddress + 0x1B40C6, disable);
 
                         // reset action variable
-                        module_environment_ACTION_force_load_textures = "";
+                        module_environment_force_load_textures = "";
                     }
 
                     // loads last checkpoint
-                    else if (module_environment_ACTION_load_last_checkpoint == "TRUE")
+                    else if (module_environment_load_last_checkpoint == "TRUE")
                     {
                         // get checkpoint loader address
                         uint checkpoint = toolkit.ReadMemoryInt32(moduleAddress + 0x73D868) + 0x3F0;
@@ -367,14 +369,39 @@ namespace kangur
                         toolkit.WriteMemory(checkpoint, BitConverter.GetBytes(2));
 
                         // reset action variable
-                        module_environment_ACTION_load_last_checkpoint = "";
+                        module_environment_load_last_checkpoint = "";
+                    }
+
+                    // disable checkpoint hitbox
+                    else if (module_environment_disable_checkpoint_hitbox != "")
+                    {
+                        // get checkpoint loader address
+                        uint checkpointChange = moduleAddress + 0xB3722;
+
+                        // je [address] (default code)
+                        byte[] enable = { 0x74 };
+
+                        // edit to always jmp if TRUE
+                        if (module_environment_disable_checkpoint_hitbox == "TRUE")
+                            enable = new byte[] { 0xEB };
+
+                        // write memory
+                        toolkit.WriteMemory(checkpointChange, enable);
+
+                        // reset action variable
+                        module_environment_disable_checkpoint_hitbox = "";
                     }
 
                     #endregion
+                    #region MODULE_SPEED
+
+                    #endregion
+
+
                 }
 
                 // sleep to protect performance
-                Thread.Sleep(10);
+                Thread.Sleep(1);
             }
         }
 
@@ -393,6 +420,9 @@ namespace kangur
         // open environment module form
         private void buttonModuleOpenSettingsEnvironment_Click(object sender, EventArgs e)
         { OpenModuleForm("ModuleEnvironment"); }
+
+        private void buttonModuleOpenSettingsSpeed_Click(object sender, EventArgs e)
+        { OpenModuleForm("ModuleSpeed"); }
 
         // opens module form
         private void OpenModuleForm(string moduleForm)
@@ -441,6 +471,21 @@ namespace kangur
                         // initiate form and open
                         formModuleEnvironment = new ModuleEnvironment();
                         formModuleEnvironment.Show();
+                    }
+                }
+                else if (moduleForm == "ModuleSpeed")
+                {
+                    // check if form module has been disposed
+                    if (!formModuleSpeed.IsDisposed)
+                    {
+                        if (!toolkit.IsFormOpen(moduleForm)) formModuleSpeed.Show();
+                        else if (!formModuleSpeed.Visible) formModuleSpeed.Show();
+                    }
+                    else
+                    {
+                        // initiate form and open
+                        formModuleSpeed = new ModuleSpeed();
+                        formModuleSpeed.Show();
                     }
                 }
             }

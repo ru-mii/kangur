@@ -34,6 +34,7 @@
             this.buttonUnlockAllLevels = new System.Windows.Forms.Button();
             this.checkBoxForceLoadTextures = new System.Windows.Forms.CheckBox();
             this.buttonLoadLastCheckpoint = new System.Windows.Forms.Button();
+            this.checkBoxDisableCheckpointHitbox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // comboBoxLevelSelect
@@ -115,11 +116,23 @@
             this.buttonLoadLastCheckpoint.UseVisualStyleBackColor = true;
             this.buttonLoadLastCheckpoint.Click += new System.EventHandler(this.buttonLoadLastCheckpoint_Click);
             // 
+            // checkBoxDisableCheckpointHitbox
+            // 
+            this.checkBoxDisableCheckpointHitbox.AutoSize = true;
+            this.checkBoxDisableCheckpointHitbox.Location = new System.Drawing.Point(12, 119);
+            this.checkBoxDisableCheckpointHitbox.Name = "checkBoxDisableCheckpointHitbox";
+            this.checkBoxDisableCheckpointHitbox.Size = new System.Drawing.Size(146, 17);
+            this.checkBoxDisableCheckpointHitbox.TabIndex = 5;
+            this.checkBoxDisableCheckpointHitbox.Text = "disable checkpoint hitbox";
+            this.checkBoxDisableCheckpointHitbox.UseVisualStyleBackColor = true;
+            this.checkBoxDisableCheckpointHitbox.CheckedChanged += new System.EventHandler(this.checkBoxDisableCheckpointHitbox_CheckedChanged);
+            // 
             // ModuleEnvironment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(257, 122);
+            this.ClientSize = new System.Drawing.Size(257, 144);
+            this.Controls.Add(this.checkBoxDisableCheckpointHitbox);
             this.Controls.Add(this.buttonLoadLastCheckpoint);
             this.Controls.Add(this.checkBoxForceLoadTextures);
             this.Controls.Add(this.buttonUnlockAllLevels);
@@ -144,5 +157,6 @@
         private System.Windows.Forms.Button buttonUnlockAllLevels;
         private System.Windows.Forms.CheckBox checkBoxForceLoadTextures;
         private System.Windows.Forms.Button buttonLoadLastCheckpoint;
+        private System.Windows.Forms.CheckBox checkBoxDisableCheckpointHitbox;
     }
 }

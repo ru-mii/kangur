@@ -25,23 +25,26 @@ namespace kangur
         {
             // we add 1 because levels start from 1 in kao, not 0
             if (comboBoxLevelSelect.SelectedIndex != -1)
-                Main.module_environment_ACTION_loadLevel = comboBoxLevelSelect.SelectedIndex + 1;
+                Main.module_environment_loadLevel = comboBoxLevelSelect.SelectedIndex + 1;
         }
 
         // unlocks all levels and disable button
         private void buttonUnlockAllLevels_Click(object sender, EventArgs e)
         {
-            Main.module_environment_ACTION_unlock_all_levels = "TRUE";
+            Main.module_environment_unlock_all_levels = "TRUE";
             buttonUnlockAllLevels.Enabled = false;
         }
 
         // force load all textures
         private void checkBoxForceLoadTextures_CheckedChanged(object sender, EventArgs e)
-        { Main.module_environment_ACTION_force_load_textures = checkBoxForceLoadTextures.Checked.ToString().ToUpper(); }
+        { Main.module_environment_force_load_textures = checkBoxForceLoadTextures.Checked.ToString().ToUpper(); }
+
+        private void checkBoxDisableCheckpointHitbox_CheckedChanged(object sender, EventArgs e)
+        { Main.module_environment_disable_checkpoint_hitbox = checkBoxDisableCheckpointHitbox.Checked.ToString().ToUpper(); }
 
         // loads last checkpoint
         private void buttonLoadLastCheckpoint_Click(object sender, EventArgs e)
-        { Main.module_environment_ACTION_load_last_checkpoint = "TRUE"; }
+        { Main.module_environment_load_last_checkpoint = "TRUE"; }
 
         // imitates button click, function for usage from another forms
         public void ImitateButtonClick(string name)

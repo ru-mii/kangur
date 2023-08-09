@@ -135,4 +135,27 @@ namespace kangur
         [DllImport("user32.dll")]
         public static extern short GetAsyncKeyState(int vKey);
     }
+
+    public class Vector2
+    {
+        public float X, Y;
+
+        public Vector2 (float X = 0, float Y = 0)
+        {
+            this.X = X;
+            this.Y = Y;
+        }
+    }
+
+    public class Vector3
+    {
+        public float X, Y, Z;
+
+        public Vector3(float X = 0, float Y = 0, float Z = 0)
+        {
+            this.X = X;
+            this.Y = Y;
+            this.Z = Z;
+        }
+    }
 }
