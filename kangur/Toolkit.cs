@@ -12,6 +12,22 @@ namespace kangur
     // cool and useful functions
     class Toolkit
     {
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetForegroundWindow();
+
+        public bool IsMainWindowFocused()
+        {
+            if (Main.mainGameProcess != null)
+            {
+                // Get the handle of the window that currently has focus
+                IntPtr foregroundWindowHandle = GetForegroundWindow();
+
+                // Check if the foreground window handle is the same as your game's main window handle
+                return Main.mainGameProcess != null && Main.mainGameProcess.MainWindowHandle == foregroundWindowHandle;
+            }
+            else return false;
+        }
+
         // check if window = form is already open
         public bool IsFormOpen(string name)
         {

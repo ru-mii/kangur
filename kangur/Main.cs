@@ -17,7 +17,7 @@ namespace kangur
     {
         // build version, adding new line because github adds it to their file
         // and the version is being compared with one written in github file in repo
-        public static string softwareVersion = "8" + "\n";
+        public static string softwareVersion = "9" + "\n";
 
         // start time of a process, helps detecting
         // if the game reopened and we need to patch again
@@ -46,7 +46,7 @@ namespace kangur
         Hotkeys formHotkeys = new Hotkeys();
 
         // global game process
-        public static Process mainGameProcess = new Process();
+        public static Process mainGameProcess = null;
         public static uint moduleAddress = 0;
 
         // initiate main object for functions
@@ -515,95 +515,99 @@ namespace kangur
             // infinite loop
             while (true)
             {
-                // check keyboard press
-                if (toolkit.IsFormVisible("ModuleHero"))
+                // check if kao is in focus
+                if (toolkit.IsMainWindowFocused())
                 {
-                    if (toolkit.IsKeyPressed(Properties.Settings.Default.hero_snapshotKeyCode))
-                        formModuleHero.ImitateButtonClick("buttonSnapshot");
-
-                    // load position snapshot with hotkey
-                    else if (toolkit.IsKeyPressed(Properties.Settings.Default.hero_loadKeyCode))
-                        formModuleHero.ImitateButtonClick("buttonLoad");
-
-                    // boost height position
-                    else if (toolkit.IsKeyPressed(Properties.Settings.Default.hero_boostKeyCode))
-                        formModuleHero.ImitateButtonClick("buttonBoost");
-                }
-
-                if (toolkit.IsFormVisible("ModuleEnvironment"))
-                {
-                    // load level
-                    if (toolkit.IsKeyPressed(Properties.Settings.Default.environment_loadLevelKeyCode))
-                        formModuleEnvironment.ImitateButtonClick("buttonLoadLevel");
-
-                    // extract key and compare with ready table
-                    int foreLoadTexturesExtracted = Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode;
-                    if (toolkit.IsKeyPressed(foreLoadTexturesExtracted))
-                    {
-                        if (!keybardTableReady[foreLoadTexturesExtracted])
-                        {
-                            keybardTableReady[foreLoadTexturesExtracted] = true;
-                            formModuleEnvironment.ImitateCheckboxClick("checkBoxForceLoadTextures");
-                        }
-                    }
-                    else keybardTableReady[foreLoadTexturesExtracted] = false;
-
-                    // load last checkpoint
-                    if (toolkit.IsKeyPressed(Properties.Settings.Default.environment_loadLastCheckpointKeyCode))
-                    {
-                        formModuleEnvironment.ImitateButtonClick("buttonLoadLastCheckpoint");
-                    }
-                }
-
-                // check gamepad press
-                if (gamepadTable.Sum() > 0)
-                {
+                    // check keyboard press
                     if (toolkit.IsFormVisible("ModuleHero"))
                     {
-                        if (Properties.Settings.Default.hero_snapshotKeyCode >= 1000 &&
-                            gamepadTable[Properties.Settings.Default.hero_snapshotKeyCode - 1000] > 0)
+                        if (toolkit.IsKeyPressed(Properties.Settings.Default.hero_snapshotKeyCode))
                             formModuleHero.ImitateButtonClick("buttonSnapshot");
 
                         // load position snapshot with hotkey
-                        else if (Properties.Settings.Default.hero_loadKeyCode >= 1000 &&
-                            gamepadTable[Properties.Settings.Default.hero_loadKeyCode - 1000] > 0)
+                        else if (toolkit.IsKeyPressed(Properties.Settings.Default.hero_loadKeyCode))
                             formModuleHero.ImitateButtonClick("buttonLoad");
 
                         // boost height position
-                        else if (Properties.Settings.Default.hero_boostKeyCode >= 1000 &&
-                            gamepadTable[Properties.Settings.Default.hero_boostKeyCode - 1000] > 0)
+                        else if (toolkit.IsKeyPressed(Properties.Settings.Default.hero_boostKeyCode))
                             formModuleHero.ImitateButtonClick("buttonBoost");
                     }
 
-                    // take position snapshot with hotkey
                     if (toolkit.IsFormVisible("ModuleEnvironment"))
                     {
                         // load level
-                        if (Properties.Settings.Default.environment_loadLevelKeyCode >= 1000 &&
-                            gamepadTable[Properties.Settings.Default.environment_loadLevelKeyCode - 1000] > 0)
+                        if (toolkit.IsKeyPressed(Properties.Settings.Default.environment_loadLevelKeyCode))
                             formModuleEnvironment.ImitateButtonClick("buttonLoadLevel");
 
-                        // force load all textures
-                        if (Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode >= 1000 &&
-                        gamepadTable[Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode - 1000] > 0)
+                        // extract key and compare with ready table
+                        int foreLoadTexturesExtracted = Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode;
+                        if (toolkit.IsKeyPressed(foreLoadTexturesExtracted))
                         {
-                            // check if one time click is ready
-                            if (gamepadTableReady[Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode - 1000] == 0)
+                            if (!keybardTableReady[foreLoadTexturesExtracted])
                             {
+                                keybardTableReady[foreLoadTexturesExtracted] = true;
                                 formModuleEnvironment.ImitateCheckboxClick("checkBoxForceLoadTextures");
-                                gamepadTableReady[Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode - 1000] = 1;
                             }
                         }
+                        else keybardTableReady[foreLoadTexturesExtracted] = false;
 
-                        // force load all textures
-                        if (Properties.Settings.Default.environment_loadLastCheckpointKeyCode >= 1000 &&
-                        gamepadTable[Properties.Settings.Default.environment_loadLastCheckpointKeyCode - 1000] > 0)
+                        // load last checkpoint
+                        if (toolkit.IsKeyPressed(Properties.Settings.Default.environment_loadLastCheckpointKeyCode))
                         {
-                            // check if one time click is ready
-                            if (gamepadTableReady[Properties.Settings.Default.environment_loadLastCheckpointKeyCode - 1000] == 0)
+                            formModuleEnvironment.ImitateButtonClick("buttonLoadLastCheckpoint");
+                        }
+                    }
+
+                    // check gamepad press
+                    if (gamepadTable.Sum() > 0)
+                    {
+                        if (toolkit.IsFormVisible("ModuleHero"))
+                        {
+                            if (Properties.Settings.Default.hero_snapshotKeyCode >= 1000 &&
+                                gamepadTable[Properties.Settings.Default.hero_snapshotKeyCode - 1000] > 0)
+                                formModuleHero.ImitateButtonClick("buttonSnapshot");
+
+                            // load position snapshot with hotkey
+                            else if (Properties.Settings.Default.hero_loadKeyCode >= 1000 &&
+                                gamepadTable[Properties.Settings.Default.hero_loadKeyCode - 1000] > 0)
+                                formModuleHero.ImitateButtonClick("buttonLoad");
+
+                            // boost height position
+                            else if (Properties.Settings.Default.hero_boostKeyCode >= 1000 &&
+                                gamepadTable[Properties.Settings.Default.hero_boostKeyCode - 1000] > 0)
+                                formModuleHero.ImitateButtonClick("buttonBoost");
+                        }
+
+                        // take position snapshot with hotkey
+                        if (toolkit.IsFormVisible("ModuleEnvironment"))
+                        {
+                            // load level
+                            if (Properties.Settings.Default.environment_loadLevelKeyCode >= 1000 &&
+                                gamepadTable[Properties.Settings.Default.environment_loadLevelKeyCode - 1000] > 0)
+                                formModuleEnvironment.ImitateButtonClick("buttonLoadLevel");
+
+                            // force load all textures
+                            if (Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode >= 1000 &&
+                            gamepadTable[Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode - 1000] > 0)
                             {
-                                formModuleEnvironment.ImitateButtonClick("buttonLoadLastCheckpoint");
-                                gamepadTableReady[Properties.Settings.Default.environment_loadLastCheckpointKeyCode - 1000] = 1;
+                                // check if one time click is ready
+                                if (gamepadTableReady[Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode - 1000] == 0)
+                                {
+                                    formModuleEnvironment.ImitateCheckboxClick("checkBoxForceLoadTextures");
+                                    gamepadTableReady[Properties.Settings.Default.environment_forceLoadAllTexturesKeyCode - 1000] = 1;
+                                }
+                            }
+
+                            // force load all textures
+                            if (Properties.Settings.Default.environment_loadLastCheckpointKeyCode >= 1000 &&
+                            gamepadTable[Properties.Settings.Default.environment_loadLastCheckpointKeyCode - 1000] > 0)
+                            {
+                                // check if one time click is ready
+                                if (gamepadTableReady[Properties.Settings.Default.environment_loadLastCheckpointKeyCode - 1000] == 0)
+                                {
+                                    formModuleEnvironment.ImitateButtonClick("buttonLoadLastCheckpoint");
+                                    gamepadTableReady[Properties.Settings.Default.environment_loadLastCheckpointKeyCode - 1000] = 1;
+                                }
                             }
                         }
                     }
